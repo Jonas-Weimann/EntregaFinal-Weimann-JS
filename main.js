@@ -12,12 +12,12 @@ let totalIngresos = 0
 let totalAhorros = 0
 let saldoNeto = 0
 
-const inicializar = ()=>{
+const registrarOtroDato = ()=>{
     //El usuario decide la cantidad de datos a ingresar
     opcionElegida = parseInt(prompt('¿Desea registrar otro dato?: \n 1. Sí \n 2. No'))
     if (isNaN(opcionElegida)){
         alert('Por favor escriba un número del 1 al 2!')
-        inicializar()
+        registrarOtroDato()
     } else if (opcionElegida == 1) {
         elegirDatoAIngresar()
     } else {
@@ -50,19 +50,19 @@ const calificarDatoIngresado = (tipoDeDato)=>{
             nuevoGasto = parseInt(prompt('Escriba el monto de su gasto'))
             categoriasGastos.push(nuevaCategoria)
             gastos.push(nuevoGasto)
-            inicializar()
+            registrarOtroDato()
             break
         case 2:
             nuevaCategoria = prompt('Escriba la categoría de su ingreso')
             nuevoIngreso = parseInt(prompt('Escriba el monto de su ingreso'))
             categoriasIngresos.push(nuevaCategoria)
             ingresos.push(nuevoIngreso)
-            inicializar()
+            registrarOtroDato()
             break
         case 3:
             nuevoAhorro = parseInt(prompt('Escriba el monto destinado a ahorro'))
             ahorros.push(nuevoAhorro)
-            inicializar()
+            registrarOtroDato()
             break
     }
 }
@@ -83,8 +83,29 @@ const calcularTotales = ()=>{
 
 const finalizar = ()=>{
     //Se muestra un resumen de los datos ingresados
-    alert('Usted ha ganado $' + totalIngresos + ' en ' + categoriasIngresos + '\n Usted ha gastado $' + totalGastos + ' en ' + categoriasGastos + '\n Usted ha destinado $' + totalAhorros + ' de su dinero a ahorros')
-    alert('Su saldo neto disponible para usar es de ' + saldoNeto)
+    if (totalIngresos == 0){
+        alert('Usted no ha registrado ingresos')
+    } else {
+        alert('Usted ha ganado $' + totalIngresos + ' en ' + categoriasIngresos)
+    }
+
+    if (totalGastos == 0){
+        alert('Usted no ha registrado gastos')
+    } else {
+        alert('Usted ha gastado $' + totalGastos + ' en ' + categoriasGastos)
+    }
+
+    if (totalAhorros == 0){
+        alert('Usted no ha registrado ahorros')
+    } else {
+        alert('Usted ha destinado $' + totalAhorros + ' de su dinero a ahorros')
+    }
+
+    if (saldoNeto < 0){
+        alert('Usted no dispone de saldo para usar!')
+    } else {
+        alert('Su saldo disponible para usar es de $' + saldoNeto)
+    }
 }
 
 elegirDatoAIngresar()
