@@ -123,3 +123,26 @@ header p {
     background-color: #b854f1;
     cursor: pointer;
 }
+
+.total-container {
+    width: 100dvw;
+    background-color: #282047;
+}
+
+.total-neto {
+    font-family: century-bold;
+    font-size: 5rem;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+.total-neto::before {
+    display: block;
+    width: 100%;
+    height: 10px;
+    font-size: 1rem;
+    font-family: century;
+    text-align: center;
+    content: 'Total disponible:';
+}
