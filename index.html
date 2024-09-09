@@ -19,7 +19,7 @@
             <p>Comience registrando sus objetivos de ahorro y presupuestos. <br>Luego, podrá agregar gastos e ingresos como desee. </p>
         </div>
         <div class="bienvenida--cuerpo flex-center-row">
-            <div class="form-inicial">
+            <div class="form">
                 <h2>Añadir objetivo</h2>
                 <img src="icons/alcancia.svg" alt="alcancia-icon" class="icon">
                 <div class="input-container">
@@ -36,7 +36,7 @@
                 </div>
                 <input type="submit" value="Agregar" class="button-add">
             </div>
-            <div class="form-inicial">
+            <div class="form">
                 <h2>Añadir presupuesto</h2>
                 <img src="icons/calculadora.svg" alt="calculadora-icon" class="icon">
                 <div class="input-container">
@@ -60,6 +60,83 @@
     </section>
     <section class="total-container flex-center-col">
         <h3 class="total-neto">$0.00</h3>
+    </section>
+    <section class="registradora flex-center-row">
+        <div class="form">
+            <h4>REGISTRAR <br>GASTO</h4>
+            <img src="icons/egreso.svg" alt="gasto-icon" class="icon">
+            <div class="input-container">
+                <label for="gasto--fecha">Fecha</label>
+                <input type="date" id="gasto--fecha">
+            </div>
+            <div class="input-container">
+                <label for="gasto--detalle">Detalle</label>
+                <input type="text" id="gasto--detalle">
+            </div>
+            <div class="input-container">
+                <label for="gasto--categoria">Categoría</label>
+                <input type="text" id="gasto--categoria">
+            </div>
+            <div class="input-container">
+                <label for="gasto--medio">Medio de pago</label>
+                <input type="text" id="gasto--medio">
+            </div>
+            <div class="input-container">
+                <label for="gasto--monto">Monto</label>
+                <input type="number" min="0.00" step="0.01" id="gasto--monto">
+            </div>
+            <input type="submit" value="Agregar"class="button-add">
+        </div>
+        <div class="form">
+            <h4>REGISTRAR <br>INGRESO</h4>
+            <img src="icons/ingreso.svg" alt="ingreso-icon" class="icon">
+            <div class="input-container">
+                <label for="ingreso--fecha">Fecha</label>
+                <input type="date" id="ingreso--fecha">
+            </div>
+            <div class="input-container">
+                <label for="ingreso--detalle">Detalle</label>
+                <input type="text" id="ingreso--detalle">
+            </div>
+            <div class="input-container">
+                <label for="ingreso--categoria">Categoría</label>
+                <input type="text" id="ingreso--categoria">
+            </div>
+            <div class="input-container">
+                <label for="ingreso--medio">Medio de pago</label>
+                <input type="text" id="ingreso--medio">
+            </div>
+            <div class="input-container">
+                <label for="ingreso--monto">Monto</label>
+                <input type="number" min="0.00" step="0.01" id="ingreso--monto">
+            </div>
+            <input type="submit" value="Agregar"class="button-add">
+        </div>
+        <div class="form">
+            <h4>REGISTRAR <br>AHORRO</h4>
+            <img src="icons/ahorro.svg" alt="ahorro-icon" class="icon">
+            <div class="input-container">
+                <label for="ahorro--fecha">Fecha</label>
+                <input type="date" id="ahorro--fecha">
+            </div>
+            <div class="input-container">
+                <label for="ahorro--detalle">Detalle</label>
+                <input type="text" id="ahorro--detalle">
+            </div>
+            <div class="input-container">
+                <label for="ahorro--objetivo">Objetivo</label>
+                <input type="text" id="ahorro--objetivo">
+            </div>
+            <div class="input-container">
+                <label for="ahorro--medio">Medio de pago</label>
+                <input type="text" id="ahorro--medio">
+            </div>
+            <div class="input-container">
+                <label for="ahorro--monto">Monto</label>
+                <input type="number" min="0.00" step="0.01" id="ahorro--monto">
+            </div>
+            <input type="submit" value="Agregar"class="button-add">
+        </div>
     </section>
 </body>
 </html>
