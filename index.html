@@ -8,10 +8,55 @@
     <script defer src="main.js"></script>
 </head>
 <body>
-    <header>
+    <header class="flex-center-col">
         <img src="images/ISOLOGO.png" alt="FINNAFY - Finanzas inteligentes">
         <p>Controlar y analizar sus finanzas personales nunca fue tan fácil.
             Crea presupuestos, registra y categoriza movimientos, consulta tus analíticas y mucho más con FINNAFY, el mejor gestor financiero web.</p>
     </header>
+    <section class="bienvenida flex-center-col">
+        <div class="bienvenida--titulo flex-center-col">
+            <h1>BIENVENIDO</h1>
+            <p>Comience registrando sus objetivos de ahorro y presupuestos. <br>Luego, podrá agregar gastos e ingresos como desee. </p>
+        </div>
+        <div class="bienvenida--cuerpo flex-center-row">
+            <div class="form-inicial">
+                <h2>Añadir objetivo</h2>
+                <img src="icons/alcancia.svg" alt="alcancia-icon" class="icon">
+                <div class="input-container">
+                    <label for="objetivo--fecha-inicio">Fecha de inicio</label>
+                    <input type="date" id="objetivo--fecha-inicio">
+                </div>
+                <div class="input-container">
+                    <label for="objetivo--titulo">Título</label>
+                    <input type="text" id="objetivo--titulo">
+                </div>
+                <div class="input-container">
+                    <label for="objetivo--monto-inicio">Monto inicial</label>
+                    <input type="number" min="0.00" step="0.01" id="objetivo--monto-inicio">
+                </div>
+                <input type="submit" value="Agregar" class="button-add">
+            </div>
+            <div class="form-inicial">
+                <h2>Añadir presupuesto</h2>
+                <img src="icons/calculadora.svg" alt="calculadora-icon" class="icon">
+                <div class="input-container">
+                    <label for="presupuesto--fecha-inicio">Fecha de inicio</label>
+                    <input type="date" id="presupuesto--fecha-inicio">
+                </div>
+                <div class="input-container">
+                    <label for="presupuesto--periodo">Período</label>
+                    <select id="presupuesto--periodo">
+                        <option value="Semanal">Semanal</option>
+                        <option value="Mensual">Mensual</option>
+                    </select>
+                </div>
+                <div class="input-container">
+                    <label for="presupuesto--monto">Monto a gastar</label>
+                    <input type="number" min="0.00" step="0.01" id="presupuesto--monto">
+                </div>
+                <input type="submit" value="Agregar"class="button-add">
+            </div>
+        </div>
+    </section>
 </body>
 </html>
