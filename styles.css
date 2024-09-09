@@ -1,0 +1,38 @@
+@font-face {
+    font-family: century;
+    src: url(fonts/CenturyGothic/centurygothic.ttf);
+}
+@font-face {
+    font-family: century-bold;
+    src: url(fonts/CenturyGothic/centurygothic_bold.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url(images/FONDO-HEADER.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50dvh;
+}
+
+header img {
+    width: 25%;
+    margin-bottom: 3em;
+}
+
+header p {
+    font-family: century;
+    font-size: 1.5rem;
+    color: white;
+    width: 850px;
+    text-align: center;
+}
