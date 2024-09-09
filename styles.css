@@ -175,7 +175,40 @@ header p {
 }
 
 .registradora {
+    width: 100dvw;
     background-color: #00072C;
     padding: 7em 0;
     gap: 9em;
+}
+
+.historiales {
+    width: 100dvw;
+    margin: 0;
+}
+
+.historiales div {
+    width: 80%;
+
+}
+
+table {
+    border-collapse: collapse;
+    background-color: #282047;
+    width: 100%;
+  }
+thead th {
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+}
+
+thead tr {
+    font-size: 1.4rem;
+    font-family: century;
+    color: white;
+}
+
+td {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+
 }
