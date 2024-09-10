@@ -182,11 +182,17 @@ header p {
     gap: 9em;
 }
 
+.historiales {
+    background-color: #00001E;
+    padding-bottom: 8em;
+}
+
 .historial {
     width: 70%;
     font-family: century;
     font-size: 2rem;
     background-color: #00001E;
+    margin-top: 4em;
 }
 
 .historial tr {
@@ -197,13 +203,17 @@ header p {
     text-align: center;
 }
 
-.historial th {
+
+.historial-categorias th {
     padding: 1rem;
     width: 285px;
     background-color: #272727;
     color: #F577D2;
     border: 2px solid black;
     border-collapse: collapse;
+}
+.historial tr.hidden {
+    display: none;
 }
 
 .historial tr:nth-child(even){
@@ -216,4 +226,24 @@ header p {
 .historial td {
     padding: 1rem;
     width: 285px;
+}
+
+.historial-titulo {
+    width: 100%;
+    font-size: 3rem;
+    color: #ffffff;
+    padding: 40px;
+}
+
+.historial-titulo:hover {
+    width: 100%;
+    font-size: 3rem;
+    color: #f8c6ff;
+    background-color: #282047;
+    padding: 40px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
 }
