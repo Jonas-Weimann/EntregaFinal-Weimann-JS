@@ -31,6 +31,7 @@ header {
     background-image: url(images/FONDO-HEADER.png);
     background-size: cover;
     background-repeat: no-repeat;
+    width: 100dvw;
     height: 50dvh;
 }
 
@@ -175,7 +176,44 @@ header p {
 }
 
 .registradora {
+    width: 100dvw;
     background-color: #00072C;
     padding: 7em 0;
     gap: 9em;
+}
+
+.historial {
+    width: 70%;
+    font-family: century;
+    font-size: 2rem;
+    background-color: #00001E;
+}
+
+.historial tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.historial th {
+    padding: 1rem;
+    width: 285px;
+    background-color: #272727;
+    color: #F577D2;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+.historial tr:nth-child(even){
+    background-color: #e7ade9;
+}
+.historial tr:nth-child(odd){
+    background-color: rgb(204, 120, 200);
+}
+
+.historial td {
+    padding: 1rem;
+    width: 285px;
 }
