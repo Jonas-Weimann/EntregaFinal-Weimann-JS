@@ -171,11 +171,17 @@ class Presupuesto {
 botonRegistrarObjetivo.addEventListener('click',()=>{
     tituloObjetivo = document.getElementById(`objetivo--titulo`).value.toUpperCase()
     sumaObjetivo = parseInt(document.getElementById(`objetivo--monto-inicio`).value)
+    opciones = document.getElementById(`ahorros--categoria`)
     nuevoObjetivo = document.createElement('h6')
     nuevoObjetivo.id = tituloObjetivo
-    objetivos.push(new Objetivo(tituloObjetivo, 0, sumaObjetivo, 0))
+    nuevoElemento = new Objetivo(tituloObjetivo, 0, sumaObjetivo, 0)
+    objetivos.push(nuevoElemento)
     nuevoObjetivo.innerText = `${tituloObjetivo}: 0% completado`
     misObjetivos.append(nuevoObjetivo)
+    opcion = document.createElement('option')
+    opcion.innerText = nuevoElemento.titulo
+    console.log(opcion)
+    opciones.appendChild(opcion)
     console.log(objetivos)
 })
 
