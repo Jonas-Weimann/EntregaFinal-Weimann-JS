@@ -98,13 +98,14 @@ function agregarFilaAlHistorial(tipo){
 }
 
 function agregarDato(tipo,array){
-    if (array.length == 0){
-        iniciarHistorial(tipo, array)
-    }
     obtenerDatos(tipo)
-    clasificarDato(tipo)
-    agregarFilaAlHistorial(tipo)
-
+    if (fecha != '' && monto != NaN && monto != ''){
+        if (array.length == 0){
+            iniciarHistorial(tipo, array)
+        }
+        clasificarDato(tipo)
+        agregarFilaAlHistorial(tipo)
+    }
 }
 
 function vincularObjetivo(){
@@ -112,7 +113,7 @@ function vincularObjetivo(){
     objetivoAsociadoH6 = document.getElementById(objetivoAVincular.titulo)
     if (objetivoAVincular.porcentaje <100){
         objetivoAVincular.sumaInicial += parseInt(monto)
-        objetivoAVincular.porcentaje = parseFloat(objetivoAVincular.sumaInicial*100/objetivoAVincular.sumaObjetivo)
+        objetivoAVincular.porcentaje = parseInt(objetivoAVincular.sumaInicial*100/objetivoAVincular.sumaObjetivo)
         objetivoAsociadoH6.innerText = `${objetivoAVincular.titulo}: ${objetivoAVincular.porcentaje}% completado`
     } else {
         objetivoAsociadoH6.innerText = `${objetivoAVincular.titulo}: 100% completado. ¡Felicitaciones!`
@@ -135,13 +136,14 @@ function restarPresupuestos(){
         console.log(fechaGasto.toLocaleDateString())
         return (fechaDePresupuesto <= fechaGasto && fechaGasto <= fechaFin)
     })
-    console.log(presupuestosARestar)
     presupuestosARestar.forEach((presupuestoARestar)=>{
         presupuestoAsociadoH6 = document.getElementById(presupuestoARestar.tipoDePresupuesto+presupuestoARestar.fechaDePresupuesto)
     if(presupuestoARestar.porcentaje<100){
         presupuestoARestar.montoGastado += parseInt(monto)
         presupuestoARestar.porcentaje = parseInt(presupuestoARestar.montoGastado*100/presupuestoARestar.montoDePresupuesto)
         presupuestoAsociadoH6.innerText = `${presupuestoARestar.tipoDePresupuesto} (${presupuestoARestar.fechaDePresupuesto}): ${presupuestoARestar.porcentaje}% usado`
+    } else {
+        presupuestoAsociadoH6.innerText = `${presupuestoARestar.tipoDePresupuesto} (${presupuestoARestar.fechaDePresupuesto}): 100% usado`
     }
     })
     
@@ -181,11 +183,14 @@ botonRegistrarPresupuesto.addEventListener('click',()=>{
     tipoDePresupuesto = document.getElementById(`presupuesto--periodo`).value.toUpperCase()
     fechaDePresupuesto = document.getElementById('presupuesto--fecha-inicio').value
     montoDePresupuesto = parseInt(document.getElementById(`presupuesto--monto`).value)
-    nuevoPresupuesto = document.createElement('h6')
-    nuevoPresupuesto.id = tipoDePresupuesto + fechaDePresupuesto
-    presupuestos.push(new Presupuesto(tipoDePresupuesto, fechaDePresupuesto, montoDePresupuesto, 0, 0))
-    nuevoPresupuesto.innerText = `${tipoDePresupuesto} (${fechaDePresupuesto}): 0% usado`
-    misPresupuestos.append(nuevoPresupuesto)
+    if (!(isNaN(montoDePresupuesto)) && fechaDePresupuesto != ''){
+        console.log(montoDePresupuesto, fechaDePresupuesto)
+        nuevoPresupuesto = document.createElement('h6')
+        nuevoPresupuesto.id = tipoDePresupuesto + fechaDePresupuesto
+        presupuestos.push(new Presupuesto(tipoDePresupuesto, fechaDePresupuesto, montoDePresupuesto, 0, 0))
+        nuevoPresupuesto.innerText = `${tipoDePresupuesto} (${fechaDePresupuesto}): 0% usado`
+        misPresupuestos.append(nuevoPresupuesto)
+    }
 })
 botonRegistrarGasto.addEventListener('click',()=>{
     agregarDato('gastos', gastos)

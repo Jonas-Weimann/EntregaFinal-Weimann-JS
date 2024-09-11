@@ -41,7 +41,7 @@
                 <img src="icons/calculadora.svg" alt="calculadora-icon" class="icon">
                 <div class="input-container">
                     <label for="presupuesto--fecha-inicio">Fecha de inicio</label>
-                    <input type="date" id="presupuesto--fecha-inicio">
+                    <input type="date" id="presupuesto--fecha-inicio" required>
                 </div>
                 <div class="input-container">
                     <label for="presupuesto--periodo">Período</label>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="input-container">
                     <label for="presupuesto--monto">Monto a gastar</label>
-                    <input type="number" min="0.00" step="0.01" id="presupuesto--monto">
+                    <input type="number" min="0.00" step="0.01" id="presupuesto--monto" required>
                 </div>
                 <input type="submit" value="Agregar" class="button-add" id="boton--registrar-presupuesto">
             </div>

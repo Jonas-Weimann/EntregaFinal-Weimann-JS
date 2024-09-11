@@ -250,13 +250,14 @@ header p {
 
 .objetivos-presupuestos {
     width: 100dvw;
-    height: 100dvh;
     background-color: #00072C;
 }
 
 #mis-objetivos, #mis-presupuestos {
     width: 50%;
     color: #b854f1;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     background-color: #272727;
 }
@@ -270,5 +271,6 @@ header p {
     font-family: century;
     font-size: 2rem;
     color: white;
+    text-wrap: wrap;
     background-color: #282047;
 }
