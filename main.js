@@ -17,8 +17,8 @@ const botonGuardarCambios = document.getElementById('boton--guardar-cambios')
 const botonCargarCambios = document.getElementById('boton--cargar-cambios')
 const botonDescartarCambios = document.getElementById('boton--descartar-cambios')
 
-const misObjetivos = document.getElementById('mis-objetivos')
-const misPresupuestos = document.getElementById('mis-presupuestos')
+const misObjetivos = document.getElementById('mis-objetivos--body')
+const misPresupuestos = document.getElementById('mis-presupuestos--body')
 
 const total = document.getElementById('total-neto')
 
@@ -246,8 +246,8 @@ function cargarHTML(){
 
 function borrarHTML(){
     document.getElementById('historiales--container').innerHTML = ''
-    document.getElementById('mis-objetivos').innerHTML = ''
-    document.getElementById('mis-presupuestos').innerHTML = ''
+    document.getElementById('mis-objetivos--body').innerHTML = ''
+    document.getElementById('mis-presupuestos--body').innerHTML = ''
     document.getElementById('ahorros--categoria').innerHTML = ''
     total.innerText = 0
 
@@ -319,7 +319,8 @@ botonCargarCambios.addEventListener('click',()=>{
 botonDescartarCambios.addEventListener('click',()=>{
     localStorage.clear()
     borrarDatos()
-    borrarHTML()
+    borrarHTML()    
+    guardarCambios()
     guardarHTML()
 })
 
