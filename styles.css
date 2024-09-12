@@ -221,9 +221,10 @@ header p {
 .historial-categorias th {
     padding: 1rem;
     width: 100%;
+    font-size: 1.7rem;
     background-color: #272727;
     color: #F577D2;
-    border: 2px solid black;
+    border-bottom: 2px solid black;
     border-collapse: collapse;
 }
 .historial tr.hidden {
@@ -245,6 +246,7 @@ section {
     padding: 1rem;
     width: 100%;
     text-align: center;
+    font-size: 1.4rem;
 }
 
 
@@ -296,18 +298,29 @@ section {
     padding:1rem 0 0.5rem 0;
 }
 .boton-guardar--container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     background-color: #272727;
 }
 
-#boton--guardar-cambios {
+.boton-guardar--container button {
     background-color: #00072C;
+    border-radius: 0;
     color: #ffffff;
     font-size: 3rem;
+    width: 100%;
     height: fit-content;
     padding: 2rem 0;
 }
 
-#boton--guardar-cambios:hover {
+
+.boton-guardar--container button:nth-child(2){
+    background-color: #152d76;
+}
+
+.boton-guardar--container button:hover {
     background-color: #F577D2;
 
 }
