@@ -7,148 +7,161 @@
     <link rel="stylesheet" href="styles.css" type="text/css">
     <script defer src="main.js"></script>
 </head>
-<body>
+<body class="flex-center-col">
     <header class="flex-center-col">
         <img src="images/ISOLOGO.png" alt="FINNAFY - Finanzas inteligentes">
         <p>Controlar y analizar sus finanzas personales nunca fue tan fácil.
             Crea presupuestos, registra y categoriza movimientos, consulta tus analíticas y mucho más con FINNAFY, el mejor gestor financiero web.</p>
     </header>
-    <section class="bienvenida flex-center-col">
-        <div class="bienvenida--titulo flex-center-col">
-            <h1>BIENVENIDO</h1>
-            <p>Comience registrando sus objetivos de ahorro y presupuestos. <br>Luego, podrá agregar gastos e ingresos como desee. </p>
-        </div>
-        <div class="bienvenida--cuerpo flex-center-row">
+    <main>
+        <section class="bienvenida flex-center-col">
+            <div class="bienvenida--titulo flex-center-col">
+                <h1>BIENVENIDO</h1>
+                <p>Comience registrando sus objetivos de ahorro y presupuestos. <br>Luego, podrá agregar gastos e ingresos como desee. </p>
+            </div>
+            <div class="bienvenida--cuerpo flex-center-row">
+                <div class="form">
+                    <h2>Añadir objetivo</h2>
+                    <img src="icons/alcancia.svg" alt="alcancia-icon" class="icon">
+                    <div class="input-container">
+                        <label for="objetivo--fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="objetivo--fecha-inicio">
+                    </div>
+                    <div class="input-container">
+                        <label for="objetivo--titulo">Título</label>
+                        <input type="text" id="objetivo--titulo">
+                    </div>
+                    <div class="input-container">
+                        <label for="objetivo--monto-inicio">Monto objetivo</label>
+                        <input type="number" min="0.00" step="0.01" id="objetivo--monto-inicio">
+                    </div>
+                    <input type="submit" value="Agregar" class="button-add" id="boton--registrar-objetivo">
+                </div>
+                <div class="form">
+                    <h2>Añadir presupuesto</h2>
+                    <img src="icons/calculadora.svg" alt="calculadora-icon" class="icon">
+                    <div class="input-container">
+                        <label for="presupuesto--fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="presupuesto--fecha-inicio" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="presupuesto--periodo">Período</label>
+                        <select id="presupuesto--periodo">
+                            <option value="Semanal">Semanal</option>
+                            <option value="Mensual">Mensual</option>
+                        </select>
+                    </div>
+                    <div class="input-container">
+                        <label for="presupuesto--monto">Monto a gastar</label>
+                        <input type="number" min="0.00" step="0.01" id="presupuesto--monto" required>
+                    </div>
+                    <input type="submit" value="Agregar" class="button-add" id="boton--registrar-presupuesto">
+                </div>
+            </div>
+        </section>
+        <section class="objetivos-presupuestos">
+            <div id="mis-objetivos">
+                <h4>MIS OBJETIVOS</h4>
+            </div>
+            <div id="mis-presupuestos">
+                <h4>MIS PRESUPUESTOS</h4>
+            </div>
+        </section>
+        <section class="total-container flex-center-col">
+            <h3 id="total-neto">0</h3>
+        </section>
+        
+        <section class="registradora flex-center-row">
             <div class="form">
-                <h2>Añadir objetivo</h2>
-                <img src="icons/alcancia.svg" alt="alcancia-icon" class="icon">
+                <h4>REGISTRAR <br>GASTO</h4>
+                <img src="icons/egreso.svg" alt="gasto-icon" class="icon">
                 <div class="input-container">
-                    <label for="objetivo--fecha-inicio">Fecha de inicio</label>
-                    <input type="date" id="objetivo--fecha-inicio">
+                    <label for="gastos--fecha">Fecha</label>
+                    <input type="date" id="gastos--fecha">
                 </div>
                 <div class="input-container">
-                    <label for="objetivo--titulo">Título</label>
-                    <input type="text" id="objetivo--titulo">
+                    <label for="gastos--detalle">Detalle</label>
+                    <input type="text" id="gastos--detalle">
                 </div>
                 <div class="input-container">
-                    <label for="objetivo--monto-inicio">Monto objetivo</label>
-                    <input type="number" min="0.00" step="0.01" id="objetivo--monto-inicio">
+                    <label for="gastos--categoria">Categoría</label>
+                    <input type="text" id="gastos--categoria">
                 </div>
-                <input type="submit" value="Agregar" class="button-add" id="boton--registrar-objetivo">
+                <div class="input-container">
+                    <label for="gastos--medio">Medio de pago</label>
+                    <input type="text" id="gastos--medio">
+                </div>
+                <div class="input-container">
+                    <label for="gastos--monto">Monto</label>
+                    <input type="number" min="0.00" step="0.01" id="gastos--monto">
+                </div>
+                <input type="submit" value="Agregar" class="button-add" id="boton--registrar-gasto">
             </div>
             <div class="form">
-                <h2>Añadir presupuesto</h2>
-                <img src="icons/calculadora.svg" alt="calculadora-icon" class="icon">
+                <h4>REGISTRAR <br>INGRESO</h4>
+                <img src="icons/ingreso.svg" alt="ingreso-icon" class="icon">
                 <div class="input-container">
-                    <label for="presupuesto--fecha-inicio">Fecha de inicio</label>
-                    <input type="date" id="presupuesto--fecha-inicio" required>
+                    <label for="ingresos--fecha">Fecha</label>
+                    <input type="date" id="ingresos--fecha">
                 </div>
                 <div class="input-container">
-                    <label for="presupuesto--periodo">Período</label>
-                    <select id="presupuesto--periodo">
-                        <option value="Semanal">Semanal</option>
-                        <option value="Mensual">Mensual</option>
+                    <label for="ingresos--detalle">Detalle</label>
+                    <input type="text" id="ingresos--detalle">
+                </div>
+                <div class="input-container">
+                    <label for="ingresos--categoria">Categoría</label>
+                    <input type="text" id="ingresos--categoria">
+                </div>
+                <div class="input-container">
+                    <label for="ingresos--medio">Medio de pago</label>
+                    <input type="text" id="ingresos--medio">
+                </div>
+                <div class="input-container">
+                    <label for="ingresos--monto">Monto</label>
+                    <input type="number" min="0.00" step="0.01" id="ingresos--monto">
+                </div>
+                <input type="submit" value="Agregar" class="button-add" id="boton--registrar-ingreso">
+            </div>
+            <div class="form">
+                <h4>REGISTRAR <br>AHORRO</h4>
+                <img src="icons/ahorro.svg" alt="ahorro-icon" class="icon">
+                <div class="input-container">
+                    <label for="ahorros--fecha">Fecha</label>
+                    <input type="date" id="ahorros--fecha">
+                </div>
+                <div class="input-container">
+                    <label for="ahorros--detalle">Detalle</label>
+                    <input type="text" id="ahorros--detalle">
+                </div>
+                <div class="input-container">
+                    <label for="ahorros--categoria">Objetivo</label>
+                    <select id="ahorros--categoria">
+                        
                     </select>
                 </div>
                 <div class="input-container">
-                    <label for="presupuesto--monto">Monto a gastar</label>
-                    <input type="number" min="0.00" step="0.01" id="presupuesto--monto" required>
+                    <label for="ahorros--medio">Medio de pago</label>
+                    <input type="text" id="ahorros--medio">
                 </div>
-                <input type="submit" value="Agregar" class="button-add" id="boton--registrar-presupuesto">
+                <div class="input-container">
+                    <label for="ahorros--monto">Monto</label>
+                    <input type="number" min="0.00" step="0.01" id="ahorros--monto">
+                </div>
+                <input type="submit" value="Agregar" class="button-add" id="boton--registrar-ahorro">
             </div>
-        </div>
-    </section>
-    <section class="total-container flex-center-col">
-        <h3 class="total-neto">$0.00</h3>
-    </section>
-    <section class="registradora flex-center-row">
-        <div class="form">
-            <h4>REGISTRAR <br>GASTO</h4>
-            <img src="icons/egreso.svg" alt="gasto-icon" class="icon">
-            <div class="input-container">
-                <label for="gastos--fecha">Fecha</label>
-                <input type="date" id="gastos--fecha">
-            </div>
-            <div class="input-container">
-                <label for="gastos--detalle">Detalle</label>
-                <input type="text" id="gastos--detalle">
-            </div>
-            <div class="input-container">
-                <label for="gastos--categoria">Categoría</label>
-                <input type="text" id="gastos--categoria">
-            </div>
-            <div class="input-container">
-                <label for="gastos--medio">Medio de pago</label>
-                <input type="text" id="gastos--medio">
-            </div>
-            <div class="input-container">
-                <label for="gastos--monto">Monto</label>
-                <input type="number" min="0.00" step="0.01" id="gastos--monto">
-            </div>
-            <input type="submit" value="Agregar" class="button-add" id="boton--registrar-gasto">
-        </div>
-        <div class="form">
-            <h4>REGISTRAR <br>INGRESO</h4>
-            <img src="icons/ingreso.svg" alt="ingreso-icon" class="icon">
-            <div class="input-container">
-                <label for="ingresos--fecha">Fecha</label>
-                <input type="date" id="ingresos--fecha">
-            </div>
-            <div class="input-container">
-                <label for="ingresos--detalle">Detalle</label>
-                <input type="text" id="ingresos--detalle">
-            </div>
-            <div class="input-container">
-                <label for="ingresos--categoria">Categoría</label>
-                <input type="text" id="ingresos--categoria">
-            </div>
-            <div class="input-container">
-                <label for="ingresos--medio">Medio de pago</label>
-                <input type="text" id="ingresos--medio">
-            </div>
-            <div class="input-container">
-                <label for="ingresos--monto">Monto</label>
-                <input type="number" min="0.00" step="0.01" id="ingresos--monto">
-            </div>
-            <input type="submit" value="Agregar" class="button-add" id="boton--registrar-ingreso">
-        </div>
-        <div class="form">
-            <h4>REGISTRAR <br>AHORRO</h4>
-            <img src="icons/ahorro.svg" alt="ahorro-icon" class="icon">
-            <div class="input-container">
-                <label for="ahorros--fecha">Fecha</label>
-                <input type="date" id="ahorros--fecha">
-            </div>
-            <div class="input-container">
-                <label for="ahorros--detalle">Detalle</label>
-                <input type="text" id="ahorros--detalle">
-            </div>
-            <div class="input-container">
-                <label for="ahorros--categoria">Objetivo</label>
-                <select id="ahorros--categoria">
-                    
-                </select>
-            </div>
-            <div class="input-container">
-                <label for="ahorros--medio">Medio de pago</label>
-                <input type="text" id="ahorros--medio">
-            </div>
-            <div class="input-container">
-                <label for="ahorros--monto">Monto</label>
-                <input type="number" min="0.00" step="0.01" id="ahorros--monto">
-            </div>
-            <input type="submit" value="Agregar" class="button-add" id="boton--registrar-ahorro">
-        </div>
-    </section>
-    <section class="historiales flex-center-col">
-    </section>
-    <section class="objetivos-presupuestos flex-center-row">
-        <div id="mis-objetivos">
-            <h4>MIS OBJETIVOS</h4>
-        </div>
-        <div id="mis-presupuestos">
-            <h4>MIS PRESUPUESTOS</h4>
-        </div>
-    </section>
+        </section>
+        <section class="historiales flex-center-col" id="historiales--container">
+        </section>
+
+        <section class="boton-guardar--container flex-center-col">
+            <button class="button-add" id="boton--guardar-cambios">
+                GUARDAR CAMBIOS
+            </button>
+        </section>
+    </main>
+    <footer class="flex-center-col">
+        <img src="images/ISOLOGO.png" alt="FINNAFY">
+        <p>by Jonás Weimann</p>
+    </footer>
 </body>
 </html>

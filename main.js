@@ -1,17 +1,22 @@
-let gastos = []
-let ingresos = []
-let ahorros = []
-let objetivos = []
-let presupuestos = []
+let gastos = ['gastos']
+let ingresos = ['ingresos']
+let ahorros = ['ahorros']
+let objetivos = ['objetivos']
+let presupuestos = ['presupuestos']
+
+const listaDeArrays = [gastos, ingresos, ahorros, objetivos, presupuestos]
 
 const botonRegistrarGasto = document.getElementById('boton--registrar-gasto')
 const botonRegistrarIngreso = document.getElementById('boton--registrar-ingreso')
 const botonRegistrarAhorro = document.getElementById('boton--registrar-ahorro')
 const botonRegistrarObjetivo = document.getElementById('boton--registrar-objetivo')
 const botonRegistrarPresupuesto = document.getElementById('boton--registrar-presupuesto')
+const botonGuardarCambios = document.getElementById('boton--guardar-cambios')
+
 const misObjetivos = document.getElementById('mis-objetivos')
 const misPresupuestos = document.getElementById('mis-presupuestos')
-const historialContainer = document.querySelector('.historiales')
+const total = document.getElementById('total-neto')
+
 
 let fecha
 let detalle
@@ -19,10 +24,7 @@ let categoria
 let medio
 let monto
 
-
-class Gasto{
-    static id = 0
-
+class Transaccion{
     constructor(fecha,detalle,categoria,medio,monto){
         this.fecha = fecha
         this.detalle = detalle
@@ -31,38 +33,36 @@ class Gasto{
         this.monto = monto
     }
 }
-class Ingreso{
-    static id = 0
 
-    constructor(fecha,detalle,categoria,medio,monto){
-        this.fecha = fecha
-        this.detalle = detalle
-        this.categoria = categoria
-        this.medioDePago = medio
-        this.monto = monto
+class Objetivo {
+    constructor(titulo, sumaInicial, sumaObjetivo, porcentaje){
+        this.titulo = titulo
+        this.sumaInicial = sumaInicial
+        this.sumaObjetivo = sumaObjetivo
+        this.porcentaje = porcentaje
     }
 }
-class Ahorro{
-    static id = 0
 
-    constructor(fecha,detalle,categoria,medio,monto){
-        this.fecha = fecha
-        this.detalle = detalle
-        this.categoria = categoria
-        this.medioDePago = medio
-        this.monto = monto
+class Presupuesto {
+    constructor(tipoDePresupuesto, fechaDePresupuesto, montoDePresupuesto, montoGastado, porcentaje){
+        this.tipoDePresupuesto = tipoDePresupuesto
+        this.fechaDePresupuesto = fechaDePresupuesto
+        this.montoDePresupuesto = montoDePresupuesto
+        this.montoGastado = montoGastado
+        this.porcentaje = porcentaje
     }
 }
 
 function iniciarHistorial(tipo){
-    //Crea una tabla donde se añadirán los ingresos
+    //Crea una tabla donde se añadirán los datos
+    const historialContainer = document.getElementById('historiales--container')
     historialContainer.innerHTML+=`<table class=historial id=historial-${tipo}>`
     historial = document.getElementById(`historial-${tipo}`)
     historial.innerHTML+=`<thead><tr><th class=historial-titulo id=historial-${tipo}-titulo>Historial de ${tipo} <tr class=historial-categorias id=historial-${tipo}-categorias><th>Fecha<th>Detalle<th>Categoría<th>Medio de pago<th>Monto<tbody id=historial-${tipo}-body>`
 }
 
 function obtenerDatos(tipo){
-    //Obtiene los datos de los inputs del form de registro
+    //Obtiene los datos de los inputs de los forms de registro
     fecha = document.getElementById(`${tipo}--fecha`).value
     detalle = document.getElementById(`${tipo}--detalle`).value.toUpperCase()
     categoria = document.getElementById(`${tipo}--categoria`).value.toUpperCase()
@@ -71,21 +71,27 @@ function obtenerDatos(tipo){
 }
 
 function clasificarDato(tipo) {
-    function crearYAgregar(Constructor, array) {
-        array.push(new Constructor(fecha, detalle, categoria, medio, monto))
+    //Actúa de diferente manera segun el tipo de dato del que se trate
+    //Añade los objetos a sus respectivos arrays según su tipo
+    function crearYAgregar(array) {
+        array.push(new Transaccion(fecha, detalle, categoria, medio, monto))
     }
     if (tipo == 'gastos') {
-        crearYAgregar(Gasto, gastos)
+        crearYAgregar(gastos)
         restarPresupuestos()
+        actualizarSaldoDisponible('restar')
     } else if (tipo == 'ingresos') {
-        crearYAgregar(Ingreso, ingresos)
+        crearYAgregar(ingresos)
+        actualizarSaldoDisponible('sumar')
     } else if (tipo == 'ahorros') {
-        crearYAgregar(Ahorro, ahorros)
+        crearYAgregar(ahorros)
         vincularObjetivo()
+        actualizarSaldoDisponible('restar')
     }
 }
 
 function agregarFilaAlHistorial(tipo){
+    //Agrega una fila por cada nuevo elemento creado
     const nuevaFila = document.createElement('tr')
     const celdas = [fecha, detalle, categoria, medio, `$${monto}`]
     celdas.forEach(contenido => {
@@ -99,9 +105,9 @@ function agregarFilaAlHistorial(tipo){
 
 function agregarDato(tipo,array){
     obtenerDatos(tipo)
-    if (fecha != '' && monto != NaN && monto != ''){
-        if (array.length == 0){
-            iniciarHistorial(tipo, array)
+    if (fecha != '' && !isNaN(monto) && monto != ''){
+        if (array.length == 1){
+            iniciarHistorial(tipo)
         }
         clasificarDato(tipo)
         agregarFilaAlHistorial(tipo)
@@ -149,40 +155,27 @@ function restarPresupuestos(){
     
 }
 
-class Objetivo {
-    constructor(titulo, sumaInicial, sumaObjetivo, porcentaje){
-        this.titulo = titulo
-        this.sumaInicial = sumaInicial
-        this.sumaObjetivo = sumaObjetivo
-        this.porcentaje = porcentaje
-    }
-}
 
-class Presupuesto {
-    constructor(tipoDePresupuesto, fechaDePresupuesto, montoDePresupuesto, montoGastado, porcentaje){
-        this.tipoDePresupuesto = tipoDePresupuesto
-        this.fechaDePresupuesto = fechaDePresupuesto
-        this.montoDePresupuesto = montoDePresupuesto
-        this.montoGastado = montoGastado
-        this.porcentaje = porcentaje
-    }
-}
+botonGuardarCambios.addEventListener('click',()=>{
+    guardarCambios()
+
+})
 
 botonRegistrarObjetivo.addEventListener('click',()=>{
     tituloObjetivo = document.getElementById(`objetivo--titulo`).value.toUpperCase()
     sumaObjetivo = parseInt(document.getElementById(`objetivo--monto-inicio`).value)
     opciones = document.getElementById(`ahorros--categoria`)
-    nuevoObjetivo = document.createElement('h6')
-    nuevoObjetivo.id = tituloObjetivo
-    nuevoElemento = new Objetivo(tituloObjetivo, 0, sumaObjetivo, 0)
-    objetivos.push(nuevoElemento)
-    nuevoObjetivo.innerText = `${tituloObjetivo}: 0% completado`
-    misObjetivos.append(nuevoObjetivo)
-    opcion = document.createElement('option')
-    opcion.innerText = nuevoElemento.titulo
-    console.log(opcion)
-    opciones.appendChild(opcion)
-    console.log(objetivos)
+    if (!(isNaN(sumaObjetivo)) && tituloObjetivo != ''){
+        nuevoObjetivo = document.createElement('h6')
+        nuevoObjetivo.id = tituloObjetivo
+        nuevoElemento = new Objetivo(tituloObjetivo, 0, sumaObjetivo, 0)
+        objetivos.push(nuevoElemento)
+        nuevoObjetivo.innerText = `${tituloObjetivo}: 0% completado`
+        misObjetivos.append(nuevoObjetivo)
+        opcion = document.createElement('option')
+        opcion.innerText = nuevoElemento.titulo
+        opciones.appendChild(opcion)
+    }
 })
 
 botonRegistrarPresupuesto.addEventListener('click',()=>{
@@ -190,7 +183,6 @@ botonRegistrarPresupuesto.addEventListener('click',()=>{
     fechaDePresupuesto = document.getElementById('presupuesto--fecha-inicio').value
     montoDePresupuesto = parseInt(document.getElementById(`presupuesto--monto`).value)
     if (!(isNaN(montoDePresupuesto)) && fechaDePresupuesto != ''){
-        console.log(montoDePresupuesto, fechaDePresupuesto)
         nuevoPresupuesto = document.createElement('h6')
         nuevoPresupuesto.id = tipoDePresupuesto + fechaDePresupuesto
         presupuestos.push(new Presupuesto(tipoDePresupuesto, fechaDePresupuesto, montoDePresupuesto, 0, 0))
@@ -207,3 +199,26 @@ botonRegistrarIngreso.addEventListener('click',()=>{
 botonRegistrarAhorro.addEventListener('click',()=>{
     agregarDato('ahorros', ahorros)
 })
+
+function actualizarSaldoDisponible(operacion){
+    totalValor = parseInt(total.innerText)
+    console.log(operacion)
+    if (operacion == 'sumar'){
+        totalValor += parseInt(monto)
+    } else if (operacion == 'restar'){
+        totalValor -= parseInt(monto)
+    }
+    total.innerText = totalValor
+    console.log(total, totalValor)
+}
+
+function guardarCambios(){
+    for (array of listaDeArrays){
+        localStorage.setItem(`${array[0]}`, JSON.stringify(array));
+        console.log(array)
+        console.log(array[0])
+    }
+    localStorage.setItem('objetivos', JSON.stringify(objetivos));
+    localStorage.setItem('presupuestos', JSON.stringify(presupuestos));
+    localStorage.setItem('totalNeto', total.innerText);
+}
