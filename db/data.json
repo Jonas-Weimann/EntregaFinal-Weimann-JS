@@ -1,0 +1,155 @@
+[
+    {
+        "id": 1, 
+        "nombre": "Alimentación", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 2, 
+        "nombre": "Transporte", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 3, 
+        "nombre": "Entretenimiento", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 4, 
+        "nombre": "Salud", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 5, 
+        "nombre": "Vivienda", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 6, 
+        "nombre": "Educación", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 7, 
+        "nombre": "Pérdidas", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 8, 
+        "nombre": "Suscripciones", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 9, 
+        "nombre": "Ropa", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 10, 
+        "nombre": "Tecnología", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 11, 
+        "nombre": "Hogar", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 12, 
+        "nombre": "Vacaciones", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 13, 
+        "nombre": "Mascotas", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 14, 
+        "nombre": "CuidadoPersonal", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 15, 
+        "nombre": "Impuestos", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 16, 
+        "nombre": "Donaciones", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 17, 
+        "nombre": "Deudas", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 18, 
+        "nombre": "Salidas", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 19, 
+        "nombre": "GastosFijos", 
+        "tipo": "gasto" 
+    },
+
+    {   "id": 20, 
+        "nombre": "OtrosGastos", 
+        "tipo": "gastos" 
+    },
+
+    {   "id": 21, 
+        "nombre": "Trabajo", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 22, 
+        "nombre": "Freelance", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 23, 
+        "nombre": "Regalos", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 24, 
+        "nombre": "Comisiones", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 25, 
+        "nombre": "Intereses", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 26, 
+        "nombre": "Ventas", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 27, 
+        "nombre": "Alquileres", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 28, 
+        "nombre": "Inversiones", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 29, 
+        "nombre": "Becas", 
+        "tipo": "ingreso" 
+    },
+
+    {   "id": 30, 
+        "nombre": "OtrosIngresos", 
+        "tipo": "ingreso" 
+    }
+
+]
+
+  

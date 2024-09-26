@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> FINNAFY - Gestor financiero</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="styles/styles.css" type="text/css">
     <script defer src="main.js"></script>
+    <script defer src="events.js"></script>
+
 </head>
 <body class="flex-center-col">
     <header class="flex-center-col">
@@ -14,6 +16,7 @@
             Crea presupuestos, registra y categoriza movimientos, consulta tus analíticas y mucho más con FINNAFY, el mejor gestor financiero web.</p>
     </header>
     <main>
+        <div style=" width:400px; height:200px" id="mychart"></div>
         <section class="bienvenida flex-center-col">
             <div class="bienvenida--titulo flex-center-col">
                 <h1>BIENVENIDO</h1>
@@ -87,7 +90,9 @@
                 </div>
                 <div class="input-container">
                     <label for="gastos--categoria">Categoría</label>
-                    <input type="text" id="gastos--categoria">
+                    <select id="gastos--categoria">
+                        
+                    </select>
                 </div>
                 <div class="input-container">
                     <label for="gastos--medio">Medio de pago</label>
@@ -112,7 +117,9 @@
                 </div>
                 <div class="input-container">
                     <label for="ingresos--categoria">Categoría</label>
-                    <input type="text" id="ingresos--categoria">
+                    <select id="ingresos--categoria">
+                        
+                    </select>
                 </div>
                 <div class="input-container">
                     <label for="ingresos--medio">Medio de pago</label>
@@ -154,7 +161,10 @@
         </section>
         <section class="historiales flex-center-col" id="historiales--container">
         </section>
-
+        <section id="categorias-container">
+            <h1>RESUMEN POR CATEGORIA</h1>
+            <div id="mis-categorias--body"></div>
+        </section>
         <section class="boton-guardar--container">
             <button class="button-add" id="boton--guardar-cambios">
                 GUARDAR CAMBIOS
@@ -171,5 +181,9 @@
         <img src="images/ISOLOGO.png" alt="FINNAFY">
         <p>by Jonás Weimann</p>
     </footer>
+    <!--Librería Sweet Alert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--ECharts-->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 </body>
 </html>

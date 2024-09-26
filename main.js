@@ -1,10 +1,16 @@
-//VARIABLES
+Swal.fire({
+    title: 'Error!',
+    text: 'Do you want to continue?',
+    icon: 'error',
+    confirmButtonText: 'Cool'
+});
 
 let gastos = ['gastos']
 let ingresos = ['ingresos']
 let ahorros = ['ahorros']
 let objetivos = ['objetivos']
 let presupuestos = ['presupuestos']
+let categorias = ['categorias']
 
 const listaDeArrays = [gastos, ingresos, ahorros, objetivos, presupuestos]
 
@@ -19,9 +25,34 @@ const botonDescartarCambios = document.getElementById('boton--descartar-cambios'
 
 const misObjetivos = document.getElementById('mis-objetivos--body')
 const misPresupuestos = document.getElementById('mis-presupuestos--body')
+const misCategorias = document.getElementById('mis-categorias--body')
+
+const opcionesIngresos = document.getElementById(`ingresos--categoria`)
+const opcionesGastos = document.getElementById(`gastos--categoria`)
+
 
 const total = document.getElementById('total-neto')
 
+fetch('./db/data.json')
+.then(response => response.json())
+.then(data =>{
+    data.forEach(categoria=>{
+        const card = document.createElement('div')
+        card.className=`categoria--card ${categoria.tipo}`
+        card.innerHTML= `<h2>${categoria.nombre}</h2>
+                    <p id='cat-${categoria.nombre}--monto'>0</p>`
+        misCategorias.appendChild(card)
+        //Añadir opciones a los forms de ingresos y gastos
+        const opcionHTML = document.createElement('option')
+        opcionHTML.id = `opcion-${categoria.id}`
+        opcionHTML.innerText = categoria.nombre
+        if (categoria.tipo == 'gasto'){
+            opcionesGastos.appendChild(opcionHTML)
+        } else if (categoria.tipo == 'ingreso'){
+            opcionesIngresos.appendChild(opcionHTML)
+        }
+    })
+})
 
 let fecha
 let detalle
@@ -39,6 +70,7 @@ class Transaccion{
         this.monto = monto
     }
 }
+
 
 class Objetivo{
     constructor(titulo, sumaInicial, sumaObjetivo, porcentaje){
@@ -139,6 +171,19 @@ function actualizarSaldoDisponible(operacion){
     total.innerText = totalValor
 }
 
+function actualizarCategoria(tipo){
+    const seleccion = document.getElementById(`${tipo}--categoria`)
+    const categoriaAsociada = seleccion.value
+    const cardAsociada = document.getElementById(`cat-${categoriaAsociada}--monto`)
+    console.log(cardAsociada)
+    console.log(cardAsociada.innerText)
+    let totalCategoria = parseInt(cardAsociada.innerText)
+    totalCategoria += parseInt(monto)
+    console.log(monto)
+    console.log(totalCategoria)
+    cardAsociada.innerText = totalCategoria
+}
+
 function clasificarDato(tipo){
     //Actúa de diferente manera segun el tipo de dato del que se trate
     //Añade los objetos a sus respectivos arrays según su tipo
@@ -151,10 +196,12 @@ function clasificarDato(tipo){
             crearYAgregar(gastos)
             restarPresupuestos()
             actualizarSaldoDisponible('restar')
+            actualizarCategoria(tipo)
             break
         case 'ingresos':
             crearYAgregar(ingresos)
             actualizarSaldoDisponible('sumar')
+            actualizarCategoria(tipo)
             break
         case 'ahorros':
                 crearYAgregar(ahorros)
@@ -260,67 +307,3 @@ function borrarDatos(){
     objetivos = ['objetivos']
     presupuestos = ['presupuestos']
 }
-
-//EVENTOS
-
-botonRegistrarObjetivo.addEventListener('click',()=>{
-    const tituloObjetivo = document.getElementById(`objetivo--titulo`).value.toUpperCase()
-    const sumaObjetivo = parseInt(document.getElementById(`objetivo--monto-inicio`).value)
-    const opciones = document.getElementById(`ahorros--categoria`)
-    const existeObjetivo = objetivos.some(objetivo => objetivo.titulo == tituloObjetivo)
-
-    if (!(isNaN(sumaObjetivo)) && tituloObjetivo !== '' && !existeObjetivo){
-        const nuevoObjetivoHTML = document.createElement('h6')
-        nuevoObjetivoHTML.id = tituloObjetivo
-        const nuevoElemento = new Objetivo(tituloObjetivo, 0, sumaObjetivo, 0)
-        objetivos.push(nuevoElemento)
-        nuevoObjetivoHTML.innerText = `${tituloObjetivo}: 0% completado`
-        misObjetivos.append(nuevoObjetivoHTML)
-        //Crea una opción para poder ser vinculada cuando se registre un ahorro 
-        const opcionHTML = document.createElement('option')
-        opcionHTML.id = 'opcion ' + nuevoElemento.titulo
-        opcionHTML.innerText = nuevoElemento.titulo
-        opciones.appendChild(opcionHTML)
-    }
-})
-botonRegistrarPresupuesto.addEventListener('click',()=>{
-    const tipoDePresupuesto = document.getElementById(`presupuesto--periodo`).value.toUpperCase()
-    const fechaDePresupuesto = document.getElementById('presupuesto--fecha-inicio').value
-    const montoDePresupuesto = parseInt(document.getElementById(`presupuesto--monto`).value)
-    const existePresupuesto = presupuestos.some(presupuesto => (presupuesto.tipoDePresupuesto+presupuesto.fechaDePresupuesto) == (tipoDePresupuesto+fechaDePresupuesto))
-
-    if (!(isNaN(montoDePresupuesto)) && fechaDePresupuesto !== '' && !existePresupuesto){
-        const nuevoPresupuestoHTML = document.createElement('h6')
-        nuevoPresupuestoHTML.id = tipoDePresupuesto + fechaDePresupuesto
-        presupuestos.push(new Presupuesto(tipoDePresupuesto, fechaDePresupuesto, montoDePresupuesto, 0, 0))
-        nuevoPresupuestoHTML.innerText = `${tipoDePresupuesto} (${fechaDePresupuesto}): 0% usado`
-        misPresupuestos.append(nuevoPresupuestoHTML)
-    }
-})
-
-botonRegistrarGasto.addEventListener('click',()=>{
-    registrarTransaccion('gastos', gastos)
-})
-botonRegistrarIngreso.addEventListener('click',()=>{
-    registrarTransaccion('ingresos', ingresos)
-})
-botonRegistrarAhorro.addEventListener('click',()=>{
-    registrarTransaccion('ahorros', ahorros)
-})
-
-botonGuardarCambios.addEventListener('click',()=>{
-    guardarCambios()
-    guardarHTML()
-})
-botonCargarCambios.addEventListener('click',()=>{
-    cargarCambios()
-    cargarHTML()
-})
-botonDescartarCambios.addEventListener('click',()=>{
-    localStorage.clear()
-    borrarDatos()
-    borrarHTML()    
-    guardarCambios()
-    guardarHTML()
-})
-
