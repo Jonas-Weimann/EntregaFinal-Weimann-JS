@@ -14,7 +14,9 @@
 }
 
 body {
-    width: 100dvw;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .flex-center-col {
@@ -35,7 +37,7 @@ header {
     background-image: url(../images/FONDO-HEADER.png);
     background-size: cover;
     background-repeat: no-repeat;
-    width: 100dvw;
+    width: 100%;
     height: 50dvh;
 }
 
@@ -54,7 +56,7 @@ header p {
 
 .bienvenida {
     padding: 5em 0;
-    width: 100dvw;
+    width: 100%;
     background-color: #00072C;
     font-family: century;
 }
@@ -157,7 +159,7 @@ header p {
 }
 
 .total-container {
-    width: 100dvw;
+    width: 100%;
     background-color: #282047;
     position: relative;
 }
@@ -190,7 +192,7 @@ header p {
 }
 
 .registradora {
-    width: 100dvw;
+    width: 100%;
     background-color: #00072C;
     padding: 7em 0;
     gap: 9em;
@@ -239,7 +241,7 @@ header p {
 }
 
 section {
-    width: 100dvw;
+    width: 100%;
 }
 
 .historial td {
@@ -299,7 +301,7 @@ section {
 }
 
 #categorias-container {
-    width: 100dvw;
+    width: 100%;
     background-color: #c38ec3;
     font-family: century;
     display: flex;
@@ -315,7 +317,7 @@ section {
 }
 
 #mis-categorias--body {
-    width: 100dvw;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -395,7 +397,7 @@ section {
 
 footer {
     background-color: black;
-    width: 100dvw;
+    width: 100%;
 }
 
 footer img {
@@ -410,3 +412,24 @@ footer p {
     font-family: century;
     margin-bottom: 3em;
 }
+
+.swal2-popup {
+    background-color: #26293b;
+}
+
+.swal2-title {
+    font-family: century;
+    font-size: 3rem ;
+    color: #a394c7 ;
+  }
+  
+  #swal2-html-container{
+    font-family: century;
+    color: #a394c7;
+    font-size: 20px;
+  }
+  
+  .swal2-confirm {
+    font-family: century;
+    background-color: #5c488c;
+  }

@@ -1,10 +1,4 @@
-Swal.fire({
-    title: 'Error!',
-    text: 'Do you want to continue?',
-    icon: 'error',
-    confirmButtonText: 'Cool'
-});
-
+// VARIABLES
 let gastos = ['gastos']
 let ingresos = ['ingresos']
 let ahorros = ['ahorros']
@@ -93,14 +87,6 @@ class Presupuesto{
 
 //FUNCIONES 
 
-function obtenerDatos(tipo){
-    //Obtiene los datos de los inputs de los forms de registro
-    fecha = document.getElementById(`${tipo}--fecha`).value
-    detalle = document.getElementById(`${tipo}--detalle`).value.toUpperCase()
-    categoria = document.getElementById(`${tipo}--categoria`).value.toUpperCase()
-    medio = document.getElementById(`${tipo}--medio`).value.toUpperCase()
-    monto = document.getElementById(`${tipo}--monto`).value
-}
 
 function iniciarHistorial(tipo){
     //Crea una tabla donde se añadirán los datos
@@ -226,15 +212,60 @@ function agregarFilaAlHistorial(tipo){
 }
 
 function registrarTransaccion(tipo,array){
-    obtenerDatos(tipo)
-    if (fecha != '' && !isNaN(monto) && monto != ''){
+    //Obtiene y valida los datos de los inputs de los forms de registro
+    try {
+        fecha = document.getElementById(`${tipo}--fecha`).value
+        detalle = document.getElementById(`${tipo}--detalle`).value.toUpperCase()
+        categoria = document.getElementById(`${tipo}--categoria`).value.toUpperCase()
+        medio = document.getElementById(`${tipo}--medio`).value.toUpperCase()
+        monto = document.getElementById(`${tipo}--monto`).value
+        totalValor = parseInt(total.innerText)
+        console.log(totalValor)
+
+
+        if (fecha===''){
+            throw new Error('Ingrese una fecha')
+        }
+
+        if (detalle===''){
+            throw new Error('Ingrese un detalle')
+        }
+
+        if(categoria ===''){
+            throw new Error('No hay ningún objetivo asociado, ingréselo arriba')
+        }
+
+        if(medio === ''){
+            throw new Error('Ingrese un medio de pago')
+        }
+
+        if(monto === 0 || monto === ''){
+            throw new Error('El monto no puede ser 0')
+        }
+
+        if(monto > totalValor && tipo == 'gastos'){
+            throw new Error('El monto del gasto no puede ser mayor al total disponible. Registre un ingreso primero')
+        }
+        
+        if(monto > totalValor && tipo == 'ahorros'){
+            throw new Error('El monto del ahorro no puede ser mayor al total disponible. Registre un ingreso primero')
+        }
+
+
         if (array.length == 1){
             iniciarHistorial(tipo)
         }
         clasificarDato(tipo)
         agregarFilaAlHistorial(tipo)
-    }
-}
+
+    } catch(error) {
+        Swal.fire({
+            title: 'Error',
+            text: `${error.message}`,
+            icon: 'error',
+            confirmButtonText: 'Continuar'
+        })
+    }}
 
 function guardarCambios(){
     for (array of listaDeArrays){
