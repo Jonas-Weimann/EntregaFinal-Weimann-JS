@@ -34,7 +34,7 @@ fetch('./db/data.json')
         const card = document.createElement('div')
         card.className=`categoria--card ${categoria.tipo}`
         card.innerHTML= `<h2>${categoria.nombre}</h2>
-                    <p id='cat-${categoria.nombre}--monto'>0</p>`
+                    <p class='card--valor numero' id='cat-${categoria.nombre}--monto'>0</p>`
         misCategorias.appendChild(card)
         //Añadir opciones a los forms de ingresos y gastos
         const opcionHTML = document.createElement('option')
@@ -87,6 +87,13 @@ class Presupuesto{
 
 //FUNCIONES 
 
+// function formatearNumero(){
+//     document.querySelectorAll('.numero').forEach((elemento) => {
+//         let numero = parseInt(elemento.innerText)
+//         console.log(numero)
+//         elemento.innerText = numero.toLocaleString('es-AR')
+//       });
+// }
 
 function iniciarHistorial(tipo){
     //Crea una tabla donde se añadirán los datos
@@ -150,11 +157,12 @@ function actualizarSaldoDisponible(operacion){
     // Refleja el impacto de las transacciones en el saldo disponible para usar
     totalValor = parseInt(total.innerText)
     if (operacion == 'sumar'){
-        totalValor += parseInt(monto)
+        nuevoTotal = totalValor + parseInt(monto)
+        animarContador(totalValor, nuevoTotal, total)      
     } else if (operacion == 'restar'){
-        totalValor -= parseInt(monto)
+        nuevoTotal = totalValor - parseInt(monto)
+        animarContador(totalValor, nuevoTotal, total)      
     }
-    total.innerText = totalValor
 }
 
 function actualizarCategoria(tipo){
@@ -162,8 +170,8 @@ function actualizarCategoria(tipo){
     const categoriaAsociada = seleccion.value
     const cardAsociada = document.getElementById(`cat-${categoriaAsociada}--monto`)
     let totalCategoria = parseInt(cardAsociada.innerText)
-    totalCategoria += parseInt(monto)
-    cardAsociada.innerText = totalCategoria
+    let nuevoTotal = totalCategoria + parseInt(monto)
+    animarContador(totalCategoria, nuevoTotal, cardAsociada)
 }
 
 function clasificarDato(tipo){
@@ -179,17 +187,20 @@ function clasificarDato(tipo){
             restarPresupuestos()
             actualizarSaldoDisponible('restar')
             actualizarCategoria(tipo)
+            // formatearNumero()
             break
         case 'ingresos':
             crearYAgregar(ingresos)
             actualizarSaldoDisponible('sumar')
             actualizarCategoria(tipo)
+            // formatearNumero()
             break
         case 'ahorros':
-                crearYAgregar(ahorros)
-                vincularObjetivo()
-                actualizarSaldoDisponible('restar')
-                break
+            crearYAgregar(ahorros)
+            vincularObjetivo()
+            actualizarSaldoDisponible('restar')
+            // formatearNumero()
+            break
             
     }
 }
@@ -268,7 +279,8 @@ function registrarTransaccion(tipo,array){
             icon: 'error',
             confirmButtonText: 'Continuar'
         })
-    }}
+    }
+}
 
 function guardarCambios(){
     for (array of listaDeArrays){
@@ -295,6 +307,24 @@ function guardarHTML(){
         localStorage.setItem('totalNeto', total.innerText)
 }
 
+function animarContador(valorInicial, valorFinal, caja){
+    let tasaDeCambio = valorFinal - valorInicial;
+    let paso = Math.abs(tasaDeCambio) / 1000 * 10;
+
+    if (tasaDeCambio<0){
+        paso = -paso
+    }
+
+    let contador = setInterval(()=>{
+        valorInicial += paso
+        if ((paso > 0 && valorInicial >= valorFinal) || (paso < 0 && valorInicial <= valorFinal)) {
+            valorInicial = valorFinal;
+            clearInterval(contador);
+        }
+        caja.innerText = Math.floor(valorInicial)
+    },10)
+}
+
 function cargarCambios(){
     for (array of listaDeArrays){
         const arrayGuardado = JSON.parse(localStorage.getItem(array[0]))
@@ -302,23 +332,16 @@ function cargarCambios(){
         array.forEach((elemento) =>{
             let categoriaABuscar = elemento.categoria
             const categoriaABuscarHTML = document.getElementById(`cat-${categoriaABuscar}--monto`)
+            const valorElemento = parseInt(elemento.monto)
             if (categoriaABuscarHTML !== null){
-                montoPorCategoria = parseInt(elemento.monto) + parseInt(categoriaABuscarHTML.innerText)
-                // Usando libreria CountUp
-                // const options = {
-                //     startVal: parseInt(categoriaABuscarHTML.innerText),
-                //     duration: 1.5,
-                //     separator: '.',
-                //     };
-                //     let animacion = new CountUp(categoriaABuscarHTML, montoPorCategoria, options);
-                //     animacion.start()
-                    
+                const valorOriginal = parseInt(categoriaABuscarHTML.innerText)
+                montoPorCategoria = valorElemento + valorOriginal
+                if (valorOriginal == 0){
+                    animarContador(valorOriginal, montoPorCategoria, categoriaABuscarHTML)      
+                }
             }
         })
     }
-
-
-
     const totalGuardado = JSON.parse(localStorage.getItem('totalNeto'))
     total.innerText = totalGuardado
 }
@@ -355,4 +378,9 @@ function borrarDatos(){
     ahorros = ['ahorros']
     objetivos = ['objetivos']
     presupuestos = ['presupuestos']
+    const cards = document.querySelectorAll('.card--valor')
+    cards.forEach((card)=>{
+        card.innerText = 0
+    })
 }
+
