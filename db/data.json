@@ -1,152 +1,152 @@
 [
     {
         "id": 1, 
-        "nombre": "Alimentación", 
+        "nombre": "ALIMENTACIÓN", 
         "tipo": "gasto" 
     },
 
     {   "id": 2, 
-        "nombre": "Transporte", 
+        "nombre": "TRANSPORTE", 
         "tipo": "gasto" 
     },
 
     {   "id": 3, 
-        "nombre": "Entretenimiento", 
+        "nombre": "ENTRETENIMIENTO", 
         "tipo": "gasto" 
     },
 
     {   "id": 4, 
-        "nombre": "Salud", 
+        "nombre": "SALUD", 
         "tipo": "gasto" 
     },
 
     {   "id": 5, 
-        "nombre": "Vivienda", 
+        "nombre": "VIVIENDA", 
         "tipo": "gasto" 
     },
 
     {   "id": 6, 
-        "nombre": "Educación", 
+        "nombre": "EDUCACIÓN", 
         "tipo": "gasto" 
     },
 
     {   "id": 7, 
-        "nombre": "Pérdidas", 
+        "nombre": "PÉRDIDAS", 
         "tipo": "gasto" 
     },
 
     {   "id": 8, 
-        "nombre": "Suscripciones", 
+        "nombre": "SUSCRIPCIONES", 
         "tipo": "gasto" 
     },
 
     {   "id": 9, 
-        "nombre": "Ropa", 
+        "nombre": "ROPA", 
         "tipo": "gasto" 
     },
 
     {   "id": 10, 
-        "nombre": "Tecnología", 
+        "nombre": "TECNOLOGÍA", 
         "tipo": "gasto" 
     },
 
     {   "id": 11, 
-        "nombre": "Hogar", 
+        "nombre": "HOGAR", 
         "tipo": "gasto" 
     },
 
     {   "id": 12, 
-        "nombre": "Vacaciones", 
+        "nombre": "VACACIONES", 
         "tipo": "gasto" 
     },
 
     {   "id": 13, 
-        "nombre": "Mascotas", 
+        "nombre": "MASCOTAS", 
         "tipo": "gasto" 
     },
 
     {   "id": 14, 
-        "nombre": "CuidadoPersonal", 
+        "nombre": "HIGIENE", 
         "tipo": "gasto" 
     },
 
     {   "id": 15, 
-        "nombre": "Impuestos", 
+        "nombre": "IMPUESTOS", 
         "tipo": "gasto" 
     },
 
     {   "id": 16, 
-        "nombre": "Donaciones", 
+        "nombre": "DONACIONES", 
         "tipo": "gasto" 
     },
 
     {   "id": 17, 
-        "nombre": "Deudas", 
+        "nombre": "DEUDAS", 
         "tipo": "gasto" 
     },
 
     {   "id": 18, 
-        "nombre": "Salidas", 
+        "nombre": "SALIDAS", 
         "tipo": "gasto" 
     },
 
     {   "id": 19, 
-        "nombre": "GastosFijos", 
+        "nombre": "GASTOSFIJOS", 
         "tipo": "gasto" 
     },
 
     {   "id": 20, 
-        "nombre": "OtrosGastos", 
+        "nombre": "OTROSGASTOS", 
         "tipo": "gastos" 
     },
 
     {   "id": 21, 
-        "nombre": "Trabajo", 
+        "nombre": "TRABAJO", 
         "tipo": "ingreso" 
     },
 
     {   "id": 22, 
-        "nombre": "Freelance", 
+        "nombre": "FREELANCE", 
         "tipo": "ingreso" 
     },
 
     {   "id": 23, 
-        "nombre": "Regalos", 
+        "nombre": "REGALOS", 
         "tipo": "ingreso" 
     },
 
     {   "id": 24, 
-        "nombre": "Comisiones", 
+        "nombre": "COMISIONES", 
         "tipo": "ingreso" 
     },
 
     {   "id": 25, 
-        "nombre": "Intereses", 
+        "nombre": "INTERESES", 
         "tipo": "ingreso" 
     },
 
     {   "id": 26, 
-        "nombre": "Ventas", 
+        "nombre": "VENTAS", 
         "tipo": "ingreso" 
     },
 
     {   "id": 27, 
-        "nombre": "Alquileres", 
+        "nombre": "ALQUILERES", 
         "tipo": "ingreso" 
     },
 
     {   "id": 28, 
-        "nombre": "Inversiones", 
+        "nombre": "INVERSIONES", 
         "tipo": "ingreso" 
     },
 
     {   "id": 29, 
-        "nombre": "Becas", 
+        "nombre": "BECAS", 
         "tipo": "ingreso" 
     },
 
     {   "id": 30, 
-        "nombre": "OtrosIngresos", 
+        "nombre": "OTROSINGRESOS", 
         "tipo": "ingreso" 
     }
 

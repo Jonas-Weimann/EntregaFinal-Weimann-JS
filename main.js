@@ -161,12 +161,8 @@ function actualizarCategoria(tipo){
     const seleccion = document.getElementById(`${tipo}--categoria`)
     const categoriaAsociada = seleccion.value
     const cardAsociada = document.getElementById(`cat-${categoriaAsociada}--monto`)
-    console.log(cardAsociada)
-    console.log(cardAsociada.innerText)
     let totalCategoria = parseInt(cardAsociada.innerText)
     totalCategoria += parseInt(monto)
-    console.log(monto)
-    console.log(totalCategoria)
     cardAsociada.innerText = totalCategoria
 }
 
@@ -220,7 +216,6 @@ function registrarTransaccion(tipo,array){
         medio = document.getElementById(`${tipo}--medio`).value.toUpperCase()
         monto = document.getElementById(`${tipo}--monto`).value
         totalValor = parseInt(total.innerText)
-        console.log(totalValor)
 
 
         if (fecha===''){
@@ -257,6 +252,14 @@ function registrarTransaccion(tipo,array){
         }
         clasificarDato(tipo)
         agregarFilaAlHistorial(tipo)
+        Toastify({
+            text: `${tipo.slice(0,-1).toUpperCase()} REGISTRADO CON ÉXITO  `,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true,
+          }).showToast();
 
     } catch(error) {
         Swal.fire({
@@ -290,16 +293,31 @@ function guardarHTML(){
         localStorage.setItem('opcionesHTML', opcionesHTML)
 
         localStorage.setItem('totalNeto', total.innerText)
-        console.log(historialHTML, objetivosHTML, presupuestosHTML, total.innerText)
 }
 
 function cargarCambios(){
     for (array of listaDeArrays){
         const arrayGuardado = JSON.parse(localStorage.getItem(array[0]))
         array.push(...arrayGuardado.slice(1))
-        console.log(array)
-
+        array.forEach((elemento) =>{
+            let categoriaABuscar = elemento.categoria
+            const categoriaABuscarHTML = document.getElementById(`cat-${categoriaABuscar}--monto`)
+            if (categoriaABuscarHTML !== null){
+                montoPorCategoria = parseInt(elemento.monto) + parseInt(categoriaABuscarHTML.innerText)
+                // Usando libreria CountUp
+                // const options = {
+                //     startVal: parseInt(categoriaABuscarHTML.innerText),
+                //     duration: 1.5,
+                //     separator: '.',
+                //     };
+                //     let animacion = new CountUp(categoriaABuscarHTML, montoPorCategoria, options);
+                //     animacion.start()
+                    
+            }
+        })
     }
+
+
 
     const totalGuardado = JSON.parse(localStorage.getItem('totalNeto'))
     total.innerText = totalGuardado

@@ -421,15 +421,25 @@ footer p {
     font-family: century;
     font-size: 3rem ;
     color: #a394c7 ;
-  }
-  
-  #swal2-html-container{
+}
+
+#swal2-html-container{
     font-family: century;
     color: #a394c7;
     font-size: 20px;
-  }
-  
-  .swal2-confirm {
+}
+
+.swal2-confirm {
     font-family: century;
     background-color: #5c488c;
-  }
+}
+
+.toastify {
+    position: fixed;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    font-family: century-bold;
+    color: #b854f1;
+    background: #3e2358;
+}
+
