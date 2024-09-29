@@ -33,7 +33,7 @@ fetch('./db/data.json')
     data.forEach(categoria=>{
         const card = document.createElement('div')
         card.className=`categoria--card ${categoria.tipo}`
-        card.innerHTML= `<h2>${categoria.nombre}</h2>
+        card.innerHTML= `<h2>${categoria.nombre}</h2><img class='card--icon' src='${categoria.icon}'></img>
                     <p class='card--valor numero' id='cat-${categoria.nombre}--monto'>0</p>`
         misCategorias.appendChild(card)
         //Añadir opciones a los forms de ingresos y gastos
@@ -87,12 +87,23 @@ class Presupuesto{
 
 //FUNCIONES 
 
-// function formatearNumero(){
-//     document.querySelectorAll('.numero').forEach((elemento) => {
+// function borrarFormato(){
+//     document.querySelectorAll('.numero').forEach((elemento)=>{
+//     let numero = elemento.innerText
+//     numeroSinFormato = parseInt(numero.replace(/\./g,''))
+//     elemento.innerText = numeroFormateado
+    
+//     })
+// }
+
+// function formatearNumeros(){
+//     setTimeout(()=>{
+//         document.querySelectorAll('.numero').forEach((elemento)=>{
 //         let numero = parseInt(elemento.innerText)
-//         console.log(numero)
-//         elemento.innerText = numero.toLocaleString('es-AR')
-//       });
+//         numeroFormateado = numero.toLocaleString('es-AR')
+//         elemento.innerText = numeroFormateado
+//         })
+//     },1000)
 // }
 
 function iniciarHistorial(tipo){
@@ -108,8 +119,10 @@ function vincularObjetivo(){
     const objetivoAVincular = objetivos.find((objetivo) => objetivo.titulo == categoria)
     const objetivoAsociadoH6 = document.getElementById(objetivoAVincular.titulo)
 
-    if((objetivoAVincular.porcentaje + parseInt(monto)) >= objetivoAVincular.sumaObjetivo || objetivoAVincular.porcentaje >=100){
-        objetivoAsociadoH6.innerText = `${objetivoAVincular.titulo}: 100% completado. ¡Felicitaciones!`
+    if((objetivoAVincular.sumaInicial + parseInt(monto)) >= objetivoAVincular.sumaObjetivo || objetivoAVincular.porcentaje >=100){
+        objetivoAsociadoH6.innerHTML = `${objetivoAVincular.titulo}<br>100% completado<br>¡Felicitaciones!`
+        objetivoAsociadoH6.classList.add('objetivo-completado')
+        objetivoAVincular.sumaInicial = objetivoAVincular.sumaObjetivo
         //Elimina la opcion de la registración de ahorros ya que el objetivo fue cumplido
         const opcionAsociada = document.getElementById('opcion ' + objetivoAVincular.titulo)
         opcionAsociada.remove()
@@ -117,7 +130,7 @@ function vincularObjetivo(){
         //Actualiza el progreso del objetivo asociado al ahorro registrado
         objetivoAVincular.sumaInicial += parseInt(monto)
         objetivoAVincular.porcentaje = parseInt(objetivoAVincular.sumaInicial*100/objetivoAVincular.sumaObjetivo)
-        objetivoAsociadoH6.innerText = `${objetivoAVincular.titulo}: ${objetivoAVincular.porcentaje}% completado`
+        objetivoAsociadoH6.innerHTML = `${objetivoAVincular.titulo}<br> ${objetivoAVincular.porcentaje}% completado`
     }
 }
 
@@ -143,11 +156,12 @@ function restarPresupuestos(){
         const presupuestoAsociadoH6 = document.getElementById(presupuestoARestar.tipoDePresupuesto+presupuestoARestar.fechaDePresupuesto)
         
         if((presupuestoARestar.montoGastado + parseInt(monto)) >= presupuestoARestar.montoDePresupuesto){
-            presupuestoAsociadoH6.innerText = `${presupuestoARestar.tipoDePresupuesto} (${presupuestoARestar.fechaDePresupuesto}): 100% usado`
+            presupuestoAsociadoH6.innerHTML = `${presupuestoARestar.tipoDePresupuesto}<br>${presupuestoARestar.fechaDePresupuesto}<br>100% usado`
+            presupuestoAsociadoH6.classList.add('presupuesto-completado')
         } else {
             presupuestoARestar.montoGastado += parseInt(monto)
             presupuestoARestar.porcentaje = parseInt(presupuestoARestar.montoGastado*100/presupuestoARestar.montoDePresupuesto)
-            presupuestoAsociadoH6.innerText = `${presupuestoARestar.tipoDePresupuesto} (${presupuestoARestar.fechaDePresupuesto}): ${presupuestoARestar.porcentaje}% usado`
+            presupuestoAsociadoH6.innerHTML = `${presupuestoARestar.tipoDePresupuesto}<br>${presupuestoARestar.fechaDePresupuesto}<br>${presupuestoARestar.porcentaje}% usado`
         }
     })
     
@@ -187,19 +201,16 @@ function clasificarDato(tipo){
             restarPresupuestos()
             actualizarSaldoDisponible('restar')
             actualizarCategoria(tipo)
-            // formatearNumero()
             break
         case 'ingresos':
             crearYAgregar(ingresos)
             actualizarSaldoDisponible('sumar')
             actualizarCategoria(tipo)
-            // formatearNumero()
             break
         case 'ahorros':
             crearYAgregar(ahorros)
             vincularObjetivo()
             actualizarSaldoDisponible('restar')
-            // formatearNumero()
             break
             
     }
@@ -245,7 +256,7 @@ function registrarTransaccion(tipo,array){
             throw new Error('Ingrese un medio de pago')
         }
 
-        if(monto === 0 || monto === ''){
+        if(monto == 0 || monto === ''){
             throw new Error('El monto no puede ser 0')
         }
 
@@ -261,8 +272,9 @@ function registrarTransaccion(tipo,array){
         if (array.length == 1){
             iniciarHistorial(tipo)
         }
+
         clasificarDato(tipo)
-        agregarFilaAlHistorial(tipo)
+        agregarFilaAlHistorial(tipo)        
         Toastify({
             text: `${tipo.slice(0,-1).toUpperCase()} REGISTRADO CON ÉXITO  `,
             duration: 3000,
@@ -304,6 +316,9 @@ function guardarHTML(){
         const opcionesHTML = document.getElementById('ahorros--categoria').innerHTML
         localStorage.setItem('opcionesHTML', opcionesHTML)
 
+        const categoriasHTML = document.getElementById('categorias-container').innerHTML
+        localStorage.setItem('categoriasHTML', categoriasHTML)
+
         localStorage.setItem('totalNeto', total.innerText)
 }
 
@@ -336,9 +351,7 @@ function cargarCambios(){
             if (categoriaABuscarHTML !== null){
                 const valorOriginal = parseInt(categoriaABuscarHTML.innerText)
                 montoPorCategoria = valorElemento + valorOriginal
-                if (valorOriginal == 0){
-                    animarContador(valorOriginal, montoPorCategoria, categoriaABuscarHTML)      
-                }
+                animarContador(valorOriginal, montoPorCategoria, categoriaABuscarHTML)      
             }
         })
     }
@@ -358,6 +371,9 @@ function cargarHTML(){
         
         const opcionesGuardadas = localStorage.getItem('opcionesHTML')
         document.getElementById('ahorros--categoria').innerHTML = opcionesGuardadas
+
+        const categoriasGuardadas = localStorage.getItem('categoriasHTML')
+        document.getElementById('categorias-container').innerHTML = categoriasGuardadas
 
         const saldoGuardado = localStorage.getItem('totalNeto')
         total.innerText = saldoGuardado        
@@ -383,4 +399,3 @@ function borrarDatos(){
         card.innerText = 0
     })
 }
-

@@ -15,18 +15,21 @@
         <img src="images/ISOLOGO.png" alt="FINNAFY - Finanzas inteligentes">
         <p>Controlar y analizar sus finanzas personales nunca fue tan fácil.
             Crea presupuestos, registra y categoriza movimientos, consulta tus analíticas y mucho más con FINNAFY, el mejor gestor financiero web.</p>
+        <a href="#seccion-bienvenida">Empezar</a>
     </header>
     <main>
         <!-- <div style=" width:400px; height:200px" id="mychart"></div> -->
-        <section class="bienvenida flex-center-col">
+        <section id="seccion-bienvenida" class="bienvenida flex-center-col">
             <div class="bienvenida--titulo flex-center-col">
                 <h1>BIENVENIDO</h1>
                 <p>Comience registrando sus objetivos de ahorro y presupuestos. <br>Luego, podrá agregar gastos e ingresos como desee. </p>
             </div>
             <div class="bienvenida--cuerpo flex-center-row">
                 <div class="form">
-                    <h2>Añadir objetivo</h2>
-                    <img src="icons/alcancia.svg" alt="alcancia-icon" class="icon">
+                    <div class="icon-container">
+                        <img src="icons/objetivo.svg" alt="objetivo-icon" class="icon">
+                        <h4>Añadir Objetivo</h4>
+                    </div>    
                     <div class="input-container">
                         <label for="objetivo--fecha-inicio">Fecha de inicio</label>
                         <input type="date" id="objetivo--fecha-inicio">
@@ -42,9 +45,11 @@
                     <input type="submit" value="Agregar" class="button-add" id="boton--registrar-objetivo">
                 </div>
                 <div class="form">
-                    <h2>Añadir presupuesto</h2>
-                    <img src="icons/calculadora.svg" alt="calculadora-icon" class="icon">
-                    <div class="input-container">
+                    <div class="icon-container">
+                        <img src="icons/calculadora.svg" alt="calculadora-icon" class="icon">
+                        <h4>Añadir Presupuesto</h4>
+                    </div>
+                        <div class="input-container">
                         <label for="presupuesto--fecha-inicio">Fecha de inicio</label>
                         <input type="date" id="presupuesto--fecha-inicio" required>
                     </div>
@@ -79,8 +84,10 @@
         
         <section class="registradora flex-center-row">
             <div class="form">
-                <h4>REGISTRAR <br>GASTO</h4>
-                <img src="icons/egreso.svg" alt="gasto-icon" class="icon">
+                <div class="icon-container">
+                    <img src="icons/egreso.svg" alt="gasto-icon" class="icon">
+                    <h4>Registrar <br>Gasto</h4>
+                </div>
                 <div class="input-container">
                     <label for="gastos--fecha">Fecha</label>
                     <input type="date" id="gastos--fecha">
@@ -106,8 +113,10 @@
                 <input type="submit" value="Agregar" class="button-add" id="boton--registrar-gasto">
             </div>
             <div class="form">
-                <h4>REGISTRAR <br>INGRESO</h4>
-                <img src="icons/ingreso.svg" alt="ingreso-icon" class="icon">
+                <div class="icon-container">
+                    <img src="icons/ingreso.svg" alt="ingreso-icon" class="icon">
+                    <h4>Registrar <br>Ingreso</h4>
+                </div>
                 <div class="input-container">
                     <label for="ingresos--fecha">Fecha</label>
                     <input type="date" id="ingresos--fecha">
@@ -133,8 +142,10 @@
                 <input type="submit" value="Agregar" class="button-add" id="boton--registrar-ingreso">
             </div>
             <div class="form">
-                <h4>REGISTRAR <br>AHORRO</h4>
-                <img src="icons/ahorro.svg" alt="ahorro-icon" class="icon">
+                <div class="icon-container">
+                    <img src="icons/ahorro.svg" alt="ahorro-icon" class="icon">
+                    <h4>Registrar <br>Ahorro</h4>
+                </div>
                 <div class="input-container">
                     <label for="ahorros--fecha">Fecha</label>
                     <input type="date" id="ahorros--fecha">
@@ -168,13 +179,15 @@
         </section>
         <section class="boton-guardar--container">
             <button class="button-add" id="boton--guardar-cambios">
+                <img src="https://img.icons8.com/ios/100/FFFFFF/save--v1.png" alt="save--v1"/>
                 GUARDAR CAMBIOS
             </button>
             <button class="button-add" id="boton--cargar-cambios">
+                <img src="https://img.icons8.com/ios/100/FFFFFF/spinner-frame-1.png" alt="spinner-frame-1"/>
                 CARGAR CAMBIOS
             </button>
             <button class="button-add" id="boton--descartar-cambios">
-                RESETEAR CAMBIOS
+                <img src="https://img.icons8.com/material-outlined/192/FFFFFF/filled-trash.png" alt="filled-trash"/>                RESETEAR CAMBIOS
             </button>
         </section>
     </main>

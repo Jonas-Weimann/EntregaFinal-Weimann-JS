@@ -2,152 +2,182 @@
     {
         "id": 1, 
         "nombre": "ALIMENTACIÓN", 
-        "tipo": "gasto" 
+        "tipo": "gasto",
+        "icon": "https://img.icons8.com/?size=100&id=611&format=png&color=FFFFFF"
     },
 
     {   "id": 2, 
         "nombre": "TRANSPORTE", 
-        "tipo": "gasto" 
+        "tipo": "gasto",
+        "icon": "https://img.icons8.com/?size=100&id=241&format=png&color=FFFFFF"
     },
 
     {   "id": 3, 
         "nombre": "ENTRETENIMIENTO", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=2998&format=png&color=FFFFFF"
     },
 
     {   "id": 4, 
         "nombre": "SALUD", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=2ordWc4MTp10&format=png&color=FFFFFF"
     },
 
     {   "id": 5, 
-        "nombre": "VIVIENDA", 
-        "tipo": "gasto" 
+        "nombre": "ALQUILERES", 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=60577&format=png&color=FFFFFF"
     },
 
     {   "id": 6, 
         "nombre": "EDUCACIÓN", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=OokA08UFwNkY&format=png&color=FFFFFF"
     },
 
     {   "id": 7, 
         "nombre": "PÉRDIDAS", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=377&format=png&color=FFFFFF"
     },
 
     {   "id": 8, 
         "nombre": "SUSCRIPCIONES", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=23030&format=png&color=FFFFFF"
     },
 
     {   "id": 9, 
         "nombre": "ROPA", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=9158&format=png&color=FFFFFF"
     },
 
     {   "id": 10, 
         "nombre": "TECNOLOGÍA", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=1581&format=png&color=FFFFFF"
     },
 
     {   "id": 11, 
         "nombre": "HOGAR", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=Eyy3nmHIbCL8&format=png&color=FFFFFF"
     },
 
     {   "id": 12, 
         "nombre": "VACACIONES", 
-        "tipo": "gasto" 
+        "tipo": "gasto",
+        "icon": "https://img.icons8.com/?size=100&id=2320&format=png&color=FFFFFF"
     },
 
     {   "id": 13, 
         "nombre": "MASCOTAS", 
-        "tipo": "gasto" 
+        "tipo": "gasto",
+        "icon": "https://img.icons8.com/?size=100&id=2740&format=png&color=FFFFFF"
     },
 
     {   "id": 14, 
         "nombre": "HIGIENE", 
-        "tipo": "gasto" 
+        "tipo": "gasto",
+        "icon": "https://img.icons8.com/?size=100&id=27hVOxiMeFB9&format=png&color=FFFFFF"
     },
 
     {   "id": 15, 
         "nombre": "IMPUESTOS", 
-        "tipo": "gasto" 
+        "tipo": "gasto",
+        "icon": "https://img.icons8.com/?size=100&id=4256&format=png&color=FFFFFF"
     },
 
     {   "id": 16, 
         "nombre": "DONACIONES", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=85406&format=png&color=FFFFFF"
     },
 
     {   "id": 17, 
         "nombre": "DEUDAS", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=1qr7XDuDcbzw&format=png&color=FFFFFF"
     },
 
     {   "id": 18, 
         "nombre": "SALIDAS", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=Z2dbzMDkO4WO&format=png&color=FFFFFF"
     },
 
     {   "id": 19, 
         "nombre": "GASTOSFIJOS", 
-        "tipo": "gasto" 
+        "tipo": "gasto" ,
+        "icon": "https://img.icons8.com/?size=100&id=15437&format=png&color=FFFFFF"
     },
 
     {   "id": 20, 
         "nombre": "OTROSGASTOS", 
-        "tipo": "gastos" 
+        "tipo": "gastos" ,
+        "icon": "https://img.icons8.com/?size=100&id=12579&format=png&color=FFFFFF"
     },
 
     {   "id": 21, 
         "nombre": "TRABAJO", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=2333&format=png&color=d99bd3"
     },
 
     {   "id": 22, 
         "nombre": "FREELANCE", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=39077&format=png&color=d99bd3"
     },
 
     {   "id": 23, 
         "nombre": "REGALOS", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=338&format=png&color=d99bd3"
     },
 
     {   "id": 24, 
         "nombre": "COMISIONES", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=4695&format=png&color=d99bd3"
     },
 
     {   "id": 25, 
         "nombre": "INTERESES", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=Wj4nYhwIQjbk&format=png&color=d99bd3"
     },
 
     {   "id": 26, 
         "nombre": "VENTAS", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=7492&format=png&color=d99bd3"
     },
 
     {   "id": 27, 
-        "nombre": "ALQUILERES", 
-        "tipo": "ingreso" 
+        "nombre": "GANANCIAS", 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=375&format=png&color=d99bd3"
     },
 
     {   "id": 28, 
         "nombre": "INVERSIONES", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=123828&format=png&color=d99bd3"
     },
 
     {   "id": 29, 
         "nombre": "BECAS", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=6358&format=png&color=d99bd3"
     },
 
     {   "id": 30, 
         "nombre": "OTROSINGRESOS", 
-        "tipo": "ingreso" 
+        "tipo": "ingreso" ,
+        "icon": "https://img.icons8.com/?size=100&id=12579&format=png&color=d99bd3"
     }
 
 ]
