@@ -1,13 +1,14 @@
 //EVENTOS
 botonRegistrarObjetivo.addEventListener('click',()=>{
-    try {
-        const misObjetivos = document.getElementById('mis-objetivos--body')
-        const fechaInicioObjetivo = document.getElementById('objetivo--fecha-inicio').value
-        const tituloObjetivo = document.getElementById(`objetivo--titulo`).value.toUpperCase()
-        const sumaObjetivo = parseInt(document.getElementById(`objetivo--monto-inicio`).value)
-        const opciones = document.getElementById(`ahorros--categoria`)
-        const existeObjetivo = objetivos.some(objetivo => objetivo.titulo == tituloObjetivo)
+    hayDatosSinGuardar = true
+    const misObjetivos = document.getElementById('mis-objetivos--body')
+    const fechaInicioObjetivo = document.getElementById('objetivo--fecha-inicio').value
+    const tituloObjetivo = document.getElementById(`objetivo--titulo`).value.toUpperCase()
+    const sumaObjetivo = parseInt(document.getElementById(`objetivo--monto-inicio`).value)
+    const opciones = document.getElementById(`ahorros--categoria`)
+    const existeObjetivo = objetivos.some(objetivo => objetivo.titulo == tituloObjetivo)
 
+    try {
         if (fechaInicioObjetivo === ''){
             throw new Error('Ingrese una fecha de inicio')
         }
@@ -29,9 +30,8 @@ botonRegistrarObjetivo.addEventListener('click',()=>{
         const nuevoElemento = new Objetivo(tituloObjetivo, 0, sumaObjetivo, 0)
         objetivos.push(nuevoElemento)
         nuevoObjetivoHTML.innerHTML = `${tituloObjetivo} <br> 0% completado`
+        nuevoObjetivoHTML.classList.add('animate__animated','animate__zoomIn')
         misObjetivos.appendChild(nuevoObjetivoHTML)
-        console.log(misObjetivos)
-        console.log(nuevoObjetivoHTML)
         //Crea una opción para poder ser vinculada cuando se registre un ahorro 
         const opcionHTML = document.createElement('option')
         opcionHTML.id = 'opcion ' + nuevoElemento.titulo
@@ -49,13 +49,15 @@ botonRegistrarObjetivo.addEventListener('click',()=>{
 })
 
 botonRegistrarPresupuesto.addEventListener('click',()=>{
+    hayDatosSinGuardar = true
+    const misPresupuestos = document.getElementById('mis-presupuestos--body')
+    const tipoDePresupuesto = document.getElementById(`presupuesto--periodo`).value.toUpperCase()
+    const fechaDePresupuesto = document.getElementById('presupuesto--fecha-inicio').value
+    const montoDePresupuesto = parseInt(document.getElementById(`presupuesto--monto`).value)
+    const existePresupuesto = presupuestos.some(presupuesto => (presupuesto.tipoDePresupuesto+presupuesto.fechaDePresupuesto) == (tipoDePresupuesto+fechaDePresupuesto))
+    
+
         try{
-            const misPresupuestos = document.getElementById('mis-presupuestos--body')
-            const tipoDePresupuesto = document.getElementById(`presupuesto--periodo`).value.toUpperCase()
-            const fechaDePresupuesto = document.getElementById('presupuesto--fecha-inicio').value
-            const montoDePresupuesto = parseInt(document.getElementById(`presupuesto--monto`).value)
-            const existePresupuesto = presupuestos.some(presupuesto => (presupuesto.tipoDePresupuesto+presupuesto.fechaDePresupuesto) == (tipoDePresupuesto+fechaDePresupuesto))
-            
             if (isNaN(montoDePresupuesto)) {
                 throw new Error('El monto del presupuesto no puede ser 0')
             }
@@ -72,6 +74,7 @@ botonRegistrarPresupuesto.addEventListener('click',()=>{
             nuevoPresupuestoHTML.id = tipoDePresupuesto + fechaDePresupuesto
             presupuestos.push(new Presupuesto(tipoDePresupuesto, fechaDePresupuesto, montoDePresupuesto, 0, 0))
             nuevoPresupuestoHTML.innerHTML = `${tipoDePresupuesto}<br>${fechaDePresupuesto} <br> 0% usado`
+            nuevoPresupuestoHTML.classList.add('animate__animated','animate__zoomIn', 'fecha')
             misPresupuestos.append(nuevoPresupuestoHTML)
 
         } catch(error) {
@@ -99,42 +102,32 @@ botonRegistrarAhorro.addEventListener('click',()=>{
 })
 
 botonGuardarCambios.addEventListener('click',()=>{
+    borrarFormato()
     guardarCambios()
     guardarHTML()
-    Swal.fire({
-        title: 'Éxito',
-        text: 'Los datos se han guardado correctamente',
-        icon: 'success',
-        confirmButtonText: 'Continuar'
-    })
+    formatearNumeros()
+    hayDatosSinGuardar = false
+    Swal.fire('Éxito','Los datos se han guardado correctamente','success')
+
 })
 
-const almacenamientoInicial = localStorage.length
 
 botonCargarCambios.addEventListener('click',()=>{
     try {
-        if(almacenamientoInicial < localStorage.length){
-            throw new Error('Hay cambios sin guardar')
-        }
-
         if(localStorage.length === 0){
             throw new Error('No hay datos guardados')
         }
-        cargarCambios()
-        cargarHTML()
-        Swal.fire({
-            title: 'Éxito',
-            text: 'Los datos se han cargado correctamente',
-            icon: 'success',
-            confirmButtonText: 'Continuar'
-        })
-    }catch(error){
-        Swal.fire({
-            title: 'Error',
-            text: `${error.message}`,
-            icon: 'error',
-            confirmButtonText: 'Continuar'
-        })
+        //Pedir confirmación al usuario si hay datos sin guardar
+        if(hayDatosSinGuardar){
+            procesarDatosSinGuardar()
+        } else {
+            cargarCambios()
+            cargarHTML()
+            formatearNumeros()
+            Swal.fire('Éxito','Los datos se han cargado correctamente','success')
+        }
+    } catch(error){
+        Swal.fire('Error',`${error.message}`,'error')
     }
 
 })
@@ -143,11 +136,7 @@ botonDescartarCambios.addEventListener('click',()=>{
     localStorage.clear()
     borrarDatos()
     borrarHTML()
-    Swal.fire({
-        title: 'Éxito',
-        text: 'Los datos se han eliminado correctamente',
-        icon: 'success',
-        confirmButtonText: 'Continuar'
-    })  
+    Swal.fire('Éxito','Los datos se han eliminado correctamente','success')
 })
+
 

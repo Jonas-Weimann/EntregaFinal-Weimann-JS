@@ -20,6 +20,8 @@
     --color-azul-oscuro: #0f041c;
     --color-rosa-fuerte: #f577d2;
     --color-borgonia: #3f223e;
+    --animate-duration: 400ms;
+    --animation-iteration-count: 1;
 }
 
 html {
@@ -285,6 +287,10 @@ header a:hover {
     width: 100%;
 }
 
+tbody tr {
+    transition: .5s ease;
+
+}
 
 tbody tr:last-child {
     border-radius: 0 0 2rem 2rem;
@@ -333,6 +339,16 @@ section {
     padding: 40px;
 }
 
+.monto-historiales::before {
+    transform: translateX(-10);
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.4rem;
+    font-family: century;
+    text-align: center;
+    content: '$';
+}
+
 .hidden {
     display: none;
 }
@@ -346,6 +362,10 @@ section {
     background-size: cover;
     gap: 5rem;
     padding: 5rem 0;
+}
+
+.objetivos-presupuestos h6 {
+    
 }
 
 #mis-presupuestos, #mis-objetivos {
@@ -397,6 +417,7 @@ section {
     background-color: #f8c6ff3f;
     border: var(--color-secundario) 2px solid;
     border-radius: 1rem;
+    transition: .3s;
 }
 
 #categorias-container {
@@ -455,10 +476,24 @@ section {
 
 
 .categoria--card:hover, .categoria--card.ingreso:hover {
-    transition: .5s;
+    transition: all .5s;
     opacity: 0.95;
     scale: 1.05
 }
+
+#mis-objetivos--body h6:hover, #mis-presupuestos--body h6:hover {
+    transition: all .5s;
+    scale: 1.05;
+    will-change: transform;
+    background-color: #f8c6ff99;
+}
+
+#mis-objetivos--body h6.objetivo-completado:hover, #mis-presupuestos--body h6.presupuesto-completado:hover{
+    background-color: #553055ef;
+    will-change: transform;
+    transition: all .5s;
+}
+
 .categoria--card p{
     font-family: century;
     font-size: 3rem;
@@ -549,6 +584,11 @@ footer p {
 .swal2-confirm {
     font-family: century;
     background-color: #5c488c;
+}
+
+.swal2-deny {
+    font-family: century;
+    background-color: #3f223e;
 }
 
 .toastify {

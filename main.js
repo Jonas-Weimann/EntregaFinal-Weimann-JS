@@ -6,6 +6,11 @@ let objetivos = ['objetivos']
 let presupuestos = ['presupuestos']
 let categorias = ['categorias']
 
+let animacionEnCurso = false
+let hayDatosSinGuardar = false
+
+let DateTime = luxon.DateTime
+
 const listaDeArrays = [gastos, ingresos, ahorros, objetivos, presupuestos]
 
 const botonRegistrarGasto = document.getElementById('boton--registrar-gasto')
@@ -57,7 +62,7 @@ let monto
 //CLASES 
 class Transaccion{
     constructor(fecha,detalle,categoria,medio,monto){
-        this.fecha = fecha
+        this.fecha = fecha.toLocaleString('es-AR')
         this.detalle = detalle
         this.categoria = categoria
         this.medioDePago = medio
@@ -87,31 +92,45 @@ class Presupuesto{
 
 //FUNCIONES 
 
-// function borrarFormato(){
-//     document.querySelectorAll('.numero').forEach((elemento)=>{
-//     let numero = elemento.innerText
-//     numeroSinFormato = parseInt(numero.replace(/\./g,''))
-//     elemento.innerText = numeroFormateado
-    
-//     })
-// }
+function borrarFormato(){
+    //Borra el formato a los numeros
+    document.querySelectorAll('.numero').forEach((elemento)=>{
+        let numero = elemento.innerText
+        numeroSinFormato = parseInt(numero.replace(/\./g,''))
+        elemento.innerText = numeroSinFormato
+    })
+    //Cambia el formato de las fechas a MM/DD/AAAA
+    document.querySelectorAll('.fecha').forEach((elemento)=>{
+        let fechaACambiar = elemento.innerText
+        fechaACambiar = DateTime.fromISO(fechaACambiar).toLocaleString('en-US')
+        console.log(fechaACambiar)
+    })
+}
 
-// function formatearNumeros(){
-//     setTimeout(()=>{
-//         document.querySelectorAll('.numero').forEach((elemento)=>{
-//         let numero = parseInt(elemento.innerText)
-//         numeroFormateado = numero.toLocaleString('es-AR')
-//         elemento.innerText = numeroFormateado
-//         })
-//     },1000)
-// }
+function formatearNumeros(){
+    setTimeout(()=>{
+        document.querySelectorAll('.numero').forEach((elemento)=>{
+            let numero = parseInt(elemento.innerText)
+            numeroFormateado = numero.toLocaleString('es-AR')
+            elemento.innerText = numeroFormateado
+            })
+    },10)
+
+}
 
 function iniciarHistorial(tipo){
     //Crea una tabla donde se añadirán los datos
     const historialContainer = document.getElementById('historiales--container')
-    historialContainer.innerHTML+=`<table class=historial id=historial-${tipo}>`
+    nuevoHistorial = document.createElement('table')
+    nuevoHistorial.id =`historial-${tipo}`
+    nuevoHistorial.classList.add('historial', 'animate__animated', 'animate__slideInDown')
+    historialContainer.appendChild(nuevoHistorial)
     const historial = document.getElementById(`historial-${tipo}`)
     historial.innerHTML+=`<thead><tr><th class=historial-titulo id=historial-${tipo}-titulo>Historial de ${tipo} <tr class=historial-categorias id=historial-${tipo}-categorias><th>Fecha<th>Detalle<th>Categoría<th>Medio de pago<th>Monto<tbody id=historial-${tipo}-body>`
+    //Espera a la animación para borrar la clase
+    setTimeout(()=>{
+        nuevoHistorial.classList.remove('animate__animated', 'animate__slideInDown')
+    },500)
 }
 
 function vincularObjetivo(){
@@ -172,11 +191,11 @@ function actualizarSaldoDisponible(operacion){
     totalValor = parseInt(total.innerText)
     if (operacion == 'sumar'){
         nuevoTotal = totalValor + parseInt(monto)
-        animarContador(totalValor, nuevoTotal, total)      
     } else if (operacion == 'restar'){
         nuevoTotal = totalValor - parseInt(monto)
-        animarContador(totalValor, nuevoTotal, total)      
     }
+    animarContador(totalValor, nuevoTotal, total)      
+
 }
 
 function actualizarCategoria(tipo){
@@ -219,52 +238,68 @@ function clasificarDato(tipo){
 function agregarFilaAlHistorial(tipo){
     //Agrega una fila a su respectiva tabla por cada nuevo elemento creado 
     const nuevaFila = document.createElement('tr')
-    const celdas = [fecha, detalle, categoria, medio, `$${monto}`]
+    monto = parseInt(monto)
+    const celdas = [fecha, detalle, categoria, medio, monto]
     celdas.forEach(contenido => {
         const celda = document.createElement('td')
         celda.innerText = contenido
         nuevaFila.appendChild(celda)
-    });
+    })
+    nuevaFila.firstChild.classList.add('fecha')
+    nuevaFila.lastChild.classList.add('numero', 'monto-historiales')
     const historialBody = document.getElementById(`historial-${tipo}-body`)
+    nuevaFila.classList.add('animate__animated','animate__slideInUp')
     historialBody.appendChild(nuevaFila)
 }
 
 function registrarTransaccion(tipo,array){
     //Obtiene y valida los datos de los inputs de los forms de registro
+    borrarFormato()
+    hayDatosSinGuardar = true
+    fecha = document.getElementById(`${tipo}--fecha`).value
+    detalle = document.getElementById(`${tipo}--detalle`).value.toUpperCase()
+    categoria = document.getElementById(`${tipo}--categoria`).value.toUpperCase()
+    medio = document.getElementById(`${tipo}--medio`).value.toUpperCase()
+    monto = document.getElementById(`${tipo}--monto`).value
+    totalValor = parseInt(total.innerText)
+
     try {
-        fecha = document.getElementById(`${tipo}--fecha`).value
-        detalle = document.getElementById(`${tipo}--detalle`).value.toUpperCase()
-        categoria = document.getElementById(`${tipo}--categoria`).value.toUpperCase()
-        medio = document.getElementById(`${tipo}--medio`).value.toUpperCase()
-        monto = document.getElementById(`${tipo}--monto`).value
-        totalValor = parseInt(total.innerText)
-
-
+        if(animacionEnCurso){
+            formatearNumeros()
+            throw new Error('Actualizando datos. Espere y vuelva a intentar.')
+        }
         if (fecha===''){
+            formatearNumeros()
             throw new Error('Ingrese una fecha')
         }
 
         if (detalle===''){
+            formatearNumeros()
             throw new Error('Ingrese un detalle')
         }
 
         if(categoria ===''){
-            throw new Error('No hay ningún objetivo asociado, ingréselo arriba')
+            formatearNumeros()
+            throw new Error('No hay ningún objetivo asociado. Ingréselo arriba')
         }
 
         if(medio === ''){
+            formatearNumeros()
             throw new Error('Ingrese un medio de pago')
         }
 
         if(monto == 0 || monto === ''){
+            formatearNumeros()
             throw new Error('El monto no puede ser 0')
         }
 
         if(monto > totalValor && tipo == 'gastos'){
+            formatearNumeros()
             throw new Error('El monto del gasto no puede ser mayor al total disponible. Registre un ingreso primero')
         }
         
         if(monto > totalValor && tipo == 'ahorros'){
+            formatearNumeros()
             throw new Error('El monto del ahorro no puede ser mayor al total disponible. Registre un ingreso primero')
         }
 
@@ -274,7 +309,9 @@ function registrarTransaccion(tipo,array){
         }
 
         clasificarDato(tipo)
-        agregarFilaAlHistorial(tipo)        
+        fecha = DateTime.fromISO(fecha).toLocaleString('es-AR')
+        agregarFilaAlHistorial(tipo)
+        formatearNumeros()
         Toastify({
             text: `${tipo.slice(0,-1).toUpperCase()} REGISTRADO CON ÉXITO  `,
             duration: 3000,
@@ -282,7 +319,7 @@ function registrarTransaccion(tipo,array){
             gravity: "top",
             position: "center",
             stopOnFocus: true,
-          }).showToast();
+          }).showToast()
 
     } catch(error) {
         Swal.fire({
@@ -323,8 +360,9 @@ function guardarHTML(){
 }
 
 function animarContador(valorInicial, valorFinal, caja){
-    let tasaDeCambio = valorFinal - valorInicial;
-    let paso = Math.abs(tasaDeCambio) / 1000 * 10;
+    animacionEnCurso = true
+    let tasaDeCambio = valorFinal - valorInicial
+    let paso = Math.abs(tasaDeCambio) / 1000 * 10
 
     if (tasaDeCambio<0){
         paso = -paso
@@ -333,11 +371,13 @@ function animarContador(valorInicial, valorFinal, caja){
     let contador = setInterval(()=>{
         valorInicial += paso
         if ((paso > 0 && valorInicial >= valorFinal) || (paso < 0 && valorInicial <= valorFinal)) {
-            valorInicial = valorFinal;
-            clearInterval(contador);
+            valorInicial = valorFinal
+            animacionEnCurso = false
+            clearInterval(contador)
         }
-        caja.innerText = Math.floor(valorInicial)
-    },10)
+
+        caja.innerText = Math.floor(valorInicial).toLocaleString('es-AR')
+    }, 5)
 }
 
 function cargarCambios(){
@@ -397,5 +437,32 @@ function borrarDatos(){
     const cards = document.querySelectorAll('.card--valor')
     cards.forEach((card)=>{
         card.innerText = 0
+    })
+}
+
+function procesarDatosSinGuardar(){
+    Swal.fire({
+        title: 'Atención',
+        text: 'Hay cambios sin guardar.',
+        icon: 'warning',
+        showConfirmButton: true,
+        showDenyButton: true,
+        confirmButtonText: 'Guardar cambios',
+        denyButtonText: 'Descartar cambios',
+    }).then((respuesta)=>{
+        if(respuesta.isConfirmed){
+            borrarFormato()
+            guardarCambios()
+            guardarHTML()
+            Swal.fire('Éxito','Los datos se han guardado correctamente','success')
+        } else if (respuesta.isDenied){
+            borrarDatos()
+            borrarHTML()
+            cargarCambios()
+            cargarHTML()
+            Swal.fire('Éxito','Los datos se han cargado correctamente','success')
+        }
+        formatearNumeros()
+        hayDatosSinGuardar = false
     })
 }
