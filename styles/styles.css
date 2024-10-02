@@ -1,10 +1,10 @@
 @font-face {
     font-family: century;
-    src: url(../fonts/CenturyGothic/centurygothic.ttf);
+    src: url(../assets/fonts/CenturyGothic/centurygothic.ttf);
 }
 @font-face {
     font-family: century-bold;
-    src: url(../fonts/CenturyGothic/centurygothic_bold.ttf);
+    src: url(../assets/fonts/CenturyGothic/centurygothic_bold.ttf);
 }
 
 
@@ -55,7 +55,7 @@ body {
 }
 
 header {
-    background-image: url(../images/FONDO-HEADER.png);
+    background-image: url(../assets/images/FONDO-HEADER.png);
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
@@ -94,7 +94,7 @@ header a:hover {
     padding: 5em 0;
     width: 100%;
     /* background-color: var(--color-primario-oscuro); */
-    background: url(../images/bienvenida-fondo.png);
+    background: url(../assets/images/bienvenida-fondo.png);
     background-size: cover;
     font-family: century;
 
@@ -259,7 +259,7 @@ header a:hover {
 .registradora {
     width: 100%;
     /* background-color: #00072C; */
-    background: url(../images/registradora-fondo.png);
+    background: url(../assets/images/registradora-fondo.png);
     background-size: cover;
     padding: 7em 0;
     gap: 3em;
@@ -358,14 +358,10 @@ section {
     flex-direction: row;
     min-height: 100dvh;
     justify-content: center;
-    background: url(../images/objetivos-fondo.png);
+    background: url(../assets/images/objetivos-fondo.png);
     background-size: cover;
     gap: 5rem;
     padding: 5rem 0;
-}
-
-.objetivos-presupuestos h6 {
-    
 }
 
 #mis-presupuestos, #mis-objetivos {
@@ -387,7 +383,7 @@ section {
     padding: 2rem 3rem;
     gap: 2rem;
     display: flex;
-    background: url(../images/ISOLOGO-fondo.png);
+    background: url(../assets/images/ISOLOGO-fondo.png);
     background-size: contain;
     flex-direction: column;
     align-items: center;
@@ -422,7 +418,7 @@ section {
 
 #categorias-container {
     width: 100%;
-    background: url(../images/categorias-fondo.png);
+    background: url(../assets/images/categorias-fondo.png);
     font-family: century;
     display: flex;
     flex-direction: column;

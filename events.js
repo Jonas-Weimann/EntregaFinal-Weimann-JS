@@ -121,20 +121,22 @@ botonCargarCambios.addEventListener('click',()=>{
         if(hayDatosSinGuardar){
             procesarDatosSinGuardar()
         } else {
+            borrarCategorias()
             cargarCambios()
             cargarHTML()
             formatearNumeros()
+            hayDatosSinGuardar = false
             Swal.fire('Éxito','Los datos se han cargado correctamente','success')
         }
     } catch(error){
         Swal.fire('Error',`${error.message}`,'error')
     }
-
 })
 
 botonDescartarCambios.addEventListener('click',()=>{
     localStorage.clear()
     borrarDatos()
+    borrarCategorias()
     borrarHTML()
     Swal.fire('Éxito','Los datos se han eliminado correctamente','success')
 })

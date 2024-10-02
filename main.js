@@ -9,7 +9,6 @@ let categorias = ['categorias']
 let animacionEnCurso = false
 let hayDatosSinGuardar = false
 
-let DateTime = luxon.DateTime
 
 const listaDeArrays = [gastos, ingresos, ahorros, objetivos, presupuestos]
 
@@ -93,17 +92,11 @@ class Presupuesto{
 //FUNCIONES 
 
 function borrarFormato(){
-    //Borra el formato a los numeros
+    //Elimina el formato es-AR a los numeros
     document.querySelectorAll('.numero').forEach((elemento)=>{
         let numero = elemento.innerText
         numeroSinFormato = parseInt(numero.replace(/\./g,''))
         elemento.innerText = numeroSinFormato
-    })
-    //Cambia el formato de las fechas a MM/DD/AAAA
-    document.querySelectorAll('.fecha').forEach((elemento)=>{
-        let fechaACambiar = elemento.innerText
-        fechaACambiar = DateTime.fromISO(fechaACambiar).toLocaleString('en-US')
-        console.log(fechaACambiar)
     })
 }
 
@@ -307,9 +300,7 @@ function registrarTransaccion(tipo,array){
         if (array.length == 1){
             iniciarHistorial(tipo)
         }
-
         clasificarDato(tipo)
-        fecha = DateTime.fromISO(fecha).toLocaleString('es-AR')
         agregarFilaAlHistorial(tipo)
         formatearNumeros()
         Toastify({
@@ -333,7 +324,7 @@ function registrarTransaccion(tipo,array){
 
 function guardarCambios(){
     for (array of listaDeArrays){
-        localStorage.setItem(`${array[0]}`, JSON.stringify(array))
+        localStorage.setItem(array[0], JSON.stringify(array))
     }
     localStorage.setItem('objetivos', JSON.stringify(objetivos))
     localStorage.setItem('presupuestos', JSON.stringify(presupuestos))
@@ -381,23 +372,31 @@ function animarContador(valorInicial, valorFinal, caja){
 }
 
 function cargarCambios(){
-    for (array of listaDeArrays){
-        const arrayGuardado = JSON.parse(localStorage.getItem(array[0]))
-        array.push(...arrayGuardado.slice(1))
-        array.forEach((elemento) =>{
-            let categoriaABuscar = elemento.categoria
-            const categoriaABuscarHTML = document.getElementById(`cat-${categoriaABuscar}--monto`)
-            const valorElemento = parseInt(elemento.monto)
-            if (categoriaABuscarHTML !== null){
-                const valorOriginal = parseInt(categoriaABuscarHTML.innerText)
-                montoPorCategoria = valorElemento + valorOriginal
-                animarContador(valorOriginal, montoPorCategoria, categoriaABuscarHTML)      
-            }
-        })
+    for (array of listaDeArrays) {
+        const arrayGuardado = JSON.parse(localStorage.getItem(array[0]));
+        if (arrayGuardado) {
+            array.length = 0
+            array.push(...arrayGuardado)
+            cargarCategorias(array)
+        }
     }
     const totalGuardado = JSON.parse(localStorage.getItem('totalNeto'))
     total.innerText = totalGuardado
 }
+
+function cargarCategorias(array){
+    array.forEach((elemento) =>{
+        let categoriaABuscar = elemento.categoria
+        const categoriaABuscarHTML = document.getElementById(`cat-${categoriaABuscar}--monto`)
+        const valorElemento = parseInt(elemento.monto)
+        if (categoriaABuscarHTML !== null){
+            const valorOriginal = parseInt(categoriaABuscarHTML.innerText)
+            montoPorCategoria = valorElemento + valorOriginal
+            animarContador(valorOriginal, montoPorCategoria, categoriaABuscarHTML)      
+        }
+    })
+}
+
 
 function cargarHTML(){
         const historialGuardado = localStorage.getItem('historialHTML')
@@ -425,7 +424,6 @@ function borrarHTML(){
     document.getElementById('mis-presupuestos--body').innerHTML = ''
     document.getElementById('ahorros--categoria').innerHTML = ''
     total.innerText = 0
-
 }
 
 function borrarDatos(){
@@ -434,6 +432,9 @@ function borrarDatos(){
     ahorros = ['ahorros']
     objetivos = ['objetivos']
     presupuestos = ['presupuestos']
+}
+
+function borrarCategorias(){
     const cards = document.querySelectorAll('.card--valor')
     cards.forEach((card)=>{
         card.innerText = 0
@@ -456,12 +457,13 @@ function procesarDatosSinGuardar(){
             guardarHTML()
             Swal.fire('Éxito','Los datos se han guardado correctamente','success')
         } else if (respuesta.isDenied){
-            borrarDatos()
+
             borrarHTML()
             cargarCambios()
             cargarHTML()
             Swal.fire('Éxito','Los datos se han cargado correctamente','success')
         }
+    }).then(()=>{
         formatearNumeros()
         hayDatosSinGuardar = false
     })
