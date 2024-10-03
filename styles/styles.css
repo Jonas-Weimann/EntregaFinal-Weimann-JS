@@ -26,6 +26,7 @@
 
 html {
     scroll-behavior: smooth;
+    width: 100dvw;
 }
 
 * {
@@ -34,10 +35,12 @@ html {
     box-sizing: border-box;
 }
 
+main {
+    width: 100dvw;
+}
+
 body {
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    width: 100dvw;
 }
 
 .flex-center-col {
@@ -58,9 +61,9 @@ header {
     background-image: url(../assets/images/FONDO-HEADER.png);
     background-size: cover;
     background-repeat: no-repeat;
-    width: 100%;
-    height: 100vh;
-    gap: 3rem;
+    width: 100dvw;
+    height: 100dvh;
+    gap: 5rem 0;
 }
 
 header img {
@@ -90,10 +93,11 @@ header a:hover {
     background-color: var(--color-primario);
 }
 
+
+
 .bienvenida {
     padding: 5em 0;
-    width: 100%;
-    /* background-color: var(--color-primario-oscuro); */
+    width: 100dvw;
     background: url(../assets/images/bienvenida-fondo.png);
     background-size: cover;
     font-family: century;
@@ -101,7 +105,7 @@ header a:hover {
 }
 
 .bienvenida--titulo {
-    width: 120rem;
+    width: 100%;
 }
 
 .bienvenida--titulo h1 {
@@ -119,7 +123,7 @@ header a:hover {
 .bienvenida--cuerpo {
     gap: 5em;
     width: 100%;
-    margin: 1em ;
+    margin: 1em 0;
 }
 
 
@@ -258,7 +262,6 @@ header a:hover {
 
 .registradora {
     width: 100%;
-    /* background-color: #00072C; */
     background: url(../assets/images/registradora-fondo.png);
     background-size: cover;
     padding: 7em 0;
@@ -318,10 +321,6 @@ tbody tr:last-child {
     background-color: var(--color-primario-oscuro);
 }
 
-section {
-    width: 100%;
-}
-
 .historial td {
     padding: 1rem;
     width: 100%;
@@ -365,7 +364,7 @@ section {
 }
 
 #mis-presupuestos, #mis-objetivos {
-    width: 30%;
+    width: 40%;
     color: var(--color-secundario);
     background-color: var(--color-primario-oscuro);
     display: flex;
@@ -442,7 +441,7 @@ section {
 
 .categoria--card {
     width: 18%;
-    height: 20rem;
+    padding: 3rem 0;
     margin: 10px;
     background-color: var(--color-primario-oscuro);
     color: var(--color-bw);
@@ -462,7 +461,7 @@ section {
 }
 
 .categoria--card h2 {
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .card--icon {
@@ -492,11 +491,11 @@ section {
 
 .categoria--card p{
     font-family: century;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .categoria--card p::before {
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: century;
     content: '$';
 }
@@ -516,9 +515,6 @@ section {
 .button-add img {
     width: 100px;
 }
-
-
-
 
 .boton-guardar--container {
     display: flex;
@@ -594,5 +590,69 @@ footer p {
     font-family: century-bold;
     color: #b854f1;
     background: #3e2358;
+}
+
+@media (max-width: 1250px){
+
+    header p {
+        width: 80%;
+    }
+
+    .bienvenida--cuerpo {
+        gap: 0em;
+    }
+
+    .form {
+        scale: 0.75;
+    }
+
+    #mis-presupuestos, #mis-objetivos {
+        width: 40%;
+    }
+
+    #mis-presupuestos h4, #mis-objetivos h4 {
+        font-size: 2rem;
+    }
+
+    .registradora {
+        gap: 0em;
+    }
+
+    #mis-presupuestos--body h6, #mis-objetivos--body h6 {
+        max-width: 100%;
+        font-size: 1.5rem;
+        padding: .5rem 2rem;
+    }
+
+    .historial {
+        width: 90%;
+    }
+
+     .historial tr{
+        width: 100%;
+        height: 3rem;
+        font-size: .5rem;
+    }
+
+    .historial tr th {
+        font-size: 1rem;
+        padding: 0;
+    }
+    .historial td {
+        font-size: 1rem;
+    }
+
+    #historial-ingresos-titulo, #historial-gastos-titulo, #historial-ahorros-titulo{
+        background-color: var(--color-azul-oscuro);
+        height: 100%;
+        font-size: 2rem;
+    }
+    .monto-historiales::before {
+        font-size: 1rem;
+    }
+    .categoria--card {
+        width: 20rem;
+        height: 20rem;
+    }
 }
 
