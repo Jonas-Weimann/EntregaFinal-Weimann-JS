@@ -1,8 +1,18 @@
-![FINNAFY](/assets/images/banner.png)
+![FINNAFY](assets/images/BANNER.png)
 
-![Build Status](https://img.shields.io/badge/build-complete-brightgreen) ![Last Commit](https://img.shields.io/github/last-commit/Jonas-Weimann/EntregaFinal-Weimann-JS)![SweetAlert2](https://img.shields.io/badge/sweetalert2-v11-brightgreen)![Toastify](https://img.shields.io/badge/toastify--js-1.12.0-brightgreen)![AnimateCSS](https://img.shields.io/badge/animate--css-v4.1.1-brightgreen)
-
+<div align="center">
+  
+  ![Build Status](https://img.shields.io/badge/build-complete-brightgreen)
+  ![Last Commit](https://img.shields.io/github/last-commit/Jonas-Weimann/EntregaFinal-Weimann-JS)
+  ![SweetAlert2](https://img.shields.io/badge/sweetalert2-v11-brightgreen)
+  ![Toastify](https://img.shields.io/badge/toastify--js-1.12.0-brightgreen)
+  ![AnimateCSS](https://img.shields.io/badge/animate--css-v4.1.1-brightgreen)
+  
+</div>
+  
+<div align="center">
 FINNAFY es una aplicación web básica de JavaScript que permite a los usuarios registrar sus ingresos y gastos diarios, ver el total de cada uno, y determinar su saldo disponible. También incluye funciones para registrar ahorros y presupuestos, ayudando a los usuarios a regular sus transacciones y así alcanzar sus objetivos en función de sus ingresos y gastos.
+</div>
 
 ## Uso
 
